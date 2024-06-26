@@ -1,13 +1,4 @@
-// mail service
-
-
-const loggedinUser = { 
-  email: 'user@appsus.com',  
-  fullname: 'Mahatma Appsus' 
-  }
-
-
-const emails = [
+export const emails = [
     {
       id: 'e101',
       createdAt: 1551133930500,
