@@ -15,6 +15,7 @@ export function NoteFilter() {
                 name="text"
                 className="input note-filter-input"
                 placeholder="Search by text"
+                
             />
         </section>
     );
