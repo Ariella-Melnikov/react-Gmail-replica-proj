@@ -1,5 +1,11 @@
 
+import { MailList } from "../cmps/MailList.jsx"
+
 export function MailIndex() {
-    return <div>mail app</div>
+    return <section>
+<div>mail app</div>
+<MailList />
+    </section>
+    
 }
 
