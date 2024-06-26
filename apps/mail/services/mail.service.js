@@ -1,5 +1,12 @@
 // mail service
 
+
+const loggedinUser = { 
+  email: 'user@appsus.com',  
+  fullname: 'Mahatma Appsus' 
+  }
+
+
 const emails = [
     {
       id: 'e101',
