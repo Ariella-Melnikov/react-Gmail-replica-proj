@@ -2,7 +2,6 @@
 // import { noteService } from "../services/note.service.js"
 // import { NoteList } from "../cmps/NoteList.jsx";
 // import { NoteFilter } from "../cmps/NoteFilter.jsx";
-// import { AddNote } from "../cmps/AddNote.jsx";
 
 
 // const { Link, useSearchParams } = ReactRouterDOM
@@ -33,13 +32,11 @@
 
 
 
-//     if (!notes) return <div>Loading...</div>
 
 //     return (
 //         <section className='note-index'>
 //             <React.Fragment>
 //                 <NoteFilter/>
-//                 <AddNote/>
 //                     <NoteList
 //                         notes={notes}
 //                         onRemoveNote={onRemoveNote}
@@ -50,6 +47,6 @@
 //     )
 // }
 
-export function NoteIndex() {
-    return <div>note app</div>
+export function NoteIndex(){
+    <h1></h1>
 }

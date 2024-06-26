@@ -35,47 +35,30 @@ function remove(noteId) {
 function createNotes() {
     gHardCodedNotes = storageService.loadFromStorage(NOTES_KEY);
     if (!gHardCodedNotes || !gHardCodedNotes.length) {
-        gHardCodedNotes = [
-            {
-                id: 'n101',
-                createdAt: 1112233,
-                type: 'NoteTxt',
-                isPinned: false,
-                style: {
-                    backgroundColor: '#0d0'
-                },
-                info: {
-                    txt: 'Hello World!'
-                }
+        gHardCodedNotes =  [  {
+            id: 'n101',
+            createdAt: 1112233,
+            type: 'NoteTxt',
+            isPinned: false,
+            style: {
+                backgroundColor: '#0d0'
             },
-            {
-                id: 'n102',
-                createdAt: 1112244,
-                type: 'NoteImg',
-                isPinned: true,
-                info: {
-                    url: 'http://some-img/me2',
-                    title: 'Lunch Time'
-                },
-                style: {
-                    backgroundColor: '#d00'
-                }
-            },
-            // Additional notes...
-            {
-                id: 'n120',
-                createdAt: 1112422,
-                type: 'NoteImg',
-                isPinned: true,
-                info: {
-                    url: 'http://some-img/me20',
-                    title: 'Snowy Mountains'
-                },
-                style: {
-                    backgroundColor: '#d00'
-                }
+            info: {
+                txt: 'Hello World!'
             }
-        ];
+        },
+        {
+            id: 'n102',
+            createdAt: 1112244,
+            type: 'NoteImg',
+            isPinned: true,
+            info: {
+                url: 'http://some-img/me2',
+                title: 'Lunch Time'
+            },
+            style: {
+                backgroundColor: '#d00'
+            }}]
         storageService.saveToStorage(NOTES_KEY, gHardCodedNotes);
     }
 
