@@ -147,12 +147,14 @@ function _createEmail(to, subject, body) {
 }
 
 function getEmptyEmail(to = '', subject = '', body = '') {
+  const currentTimestamp = Date.now();
+  const timeDiff = 10 * 60 * 1000
   return {
     id: utilService.makeId(),
-    createdAt: currentTimestamp,
+    createdAt: currentTimestamp - timeDiff,
     subject,
     body,
-    sentAt: currentTimestamp,
+    sentAt: currentTimestamp ,
     removedAt: null,
     from: 'user@appsus.com',
     to,

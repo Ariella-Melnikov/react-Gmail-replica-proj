@@ -1,7 +1,7 @@
 import { MailList } from '../cmps/MailList.jsx'
 import { emailService } from '../services/email.service.js'
 import { MailFilter } from '../cmps/MailFilter.jsx'
-import { MailCompose } from '../cmps/MailCompose.jsx';
+import { MailCompose } from './MailCompose.jsx';
 import { MailInbox } from '../cmps/MailInbox.jsx';
 import { MailSent } from '../cmps/MailSent.jsx';
 
@@ -10,33 +10,12 @@ const { Outlet, NavLink } = ReactRouterDOM
 
 
 export function MailIndex() {
-//   const [emails, setEmails] = useState([])
-//   const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter())
   const [currentView, setCurrentView] = useState('inbox');
+  const [isComposeOpen, setIsComposeOpen] = useState(false);
 
-
-//   useEffect(() => {
-//     loadEmails()
-//     console.log('filterBy', filterBy)
-//   }, [filterBy])
-
-//   function loadEmails() {
-//     emailService
-//       .query(filterBy)
-//       .then((emails) => setEmails(emails))
-//       .catch((err) => {
-//         console.log('err:', err)
-//       })
-//   }
-
-//   function onSetFilter(filterBy) {
-//     setFilterBy({ ...filterBy })
-//   }
 
   function renderCurrentView() {
     switch (currentView) {
-    //   case 'compose':
-    //     return <MailCompose />;
       case 'inbox':
         return <MailInbox emails={emails} />;
       case 'sent':
@@ -46,8 +25,10 @@ export function MailIndex() {
     }
   }
 
+  function toggleCompose() {
+    setIsComposeOpen(!isComposeOpen);
+  }
 
-// if (!emails) return <div>Loading...</div>
 
 
   return (
@@ -57,7 +38,7 @@ export function MailIndex() {
       </header>
       <aside className='sidebar'>
         <ul>
-          <li><button onClick={() => setCurrentView('compose')}>Compose</button></li>
+          <li><button onClick={toggleCompose}>Compose</button></li>
           <li><button onClick={() => setCurrentView('inbox')}>Inbox</button></li>
           <li><button onClick={() => setCurrentView('sent')}>Sent</button></li>
         </ul>
@@ -66,7 +47,7 @@ export function MailIndex() {
         {renderCurrentView()}
       </div>
       {/* <MailFilter  filterBy={filterBy} onSetFilter={onSetFilter} /> */}
-      {/* <MailList emails={emails} /> */}
+      {isComposeOpen && <MailCompose onClose={toggleCompose} />}
     </section>
   )
 }
