@@ -14,7 +14,7 @@ export const noteService = {
     remove,
 }
 
-
+ 
 
 function query() {
     return asyncStorageService.query(NOTES_KEY)
