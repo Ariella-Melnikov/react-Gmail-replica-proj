@@ -1,6 +1,6 @@
 // note service
 
-import { storageService as asyncStorageService } from '../../../services/storage.service.js'
+import { storageService } from '../../../services/storage.service.js'
 import { asyncStorageService } from '../../../services/async-storage.service.js'
 
 
