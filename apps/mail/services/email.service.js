@@ -25,6 +25,7 @@ function query(filterBy = {}) {
     // If no emails found in storage, use staticEmails and save to storage
     if (!emails || emails.length === 0) {
       return staticEmails.map((email) => ({ ...email }))
+
     }
     return emails
   })
