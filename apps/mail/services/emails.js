@@ -5,7 +5,7 @@ export const emails = [
       subject: 'Miss you!',
       body: 'Would love to catch up sometimes',
       isRead: false,
-      sentAt: 1551133930594,
+      sentAt: 1715593200000,
       removedAt: null,
       from: 'momo@momo.com',
       to: 'user@appsus.com'
@@ -16,7 +16,7 @@ export const emails = [
       subject: 'Project Update',
       body: 'Please review the latest project updates at your earliest.',
       isRead: true,
-      sentAt: 1551133940594,
+      sentAt: 1715578800000,
       removedAt: null,
       from: 'project@appsus.com',
       to: 'user@appsus.com'
@@ -110,4 +110,43 @@ export const emails = [
       to: 'user@appsus.com'
     }
   ];
+
+
+
+
+  export const newEmails = [
+    {
+      id: 'e111',
+      createdAt: 1551133930500,
+      subject: 'Miss you!',
+      body: 'Would love to catch up sometimes',
+      isRead: false,
+      sentAt: 1715593200000,
+      removedAt: null,
+      from: 'user@appsus.com' ,
+      to: 'momo@momo.com'
+    },
+    {
+      id: 'e112',
+      createdAt: 1551133940500,
+      subject: 'Project Update',
+      body: 'Please review the latest project updates at your earliest.',
+      isRead: true,
+      sentAt: 1715578800000,
+      removedAt: null,
+      from: 'user@appsus.com',
+      to: 'project@appsus.com'
+    },
+    {
+      id: 'e113',
+      createdAt: 1551133950500,
+      subject: 'Happy Birthday!',
+      body: 'Hope you have a fantastic day filled with joy and laughter!',
+      isRead: false,
+      sentAt: 1551133950594,
+      removedAt: null,
+      from: 'user@appsus.com',
+      to:  'friend@appsus.com'
+    },
+  ]
   

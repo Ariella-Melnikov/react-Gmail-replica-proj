@@ -9,9 +9,11 @@ export function MailList({ emails, onRemoveMail }) {
       {emails.map(email => (
         <div key={email.id} className='email-card'>
           <MailPreview email={email} />
+          {/* <div className="email-actions">
           <button onClick={() => onRemoveMail(email.id)}>Remove</button>
           <button><Link to={`/mail/${email.id}`}>Details</Link></button>
           <button><Link to={`/mail/edit/${email.id}`}>Edit</Link></button>
+          </div> */}
         </div>
       ))}
     </section>

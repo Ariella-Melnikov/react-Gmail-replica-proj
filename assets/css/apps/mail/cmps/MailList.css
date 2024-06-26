@@ -1,1 +1,63 @@
  /* mail list */
+
+ .emails-lst-container {
+     display: grid;
+     background-color: #f1f3f4;
+     padding: 16px;
+ }
+
+ .email-card {
+    display: contents;
+ }
+
+ .email-card:hover {
+     background-color: #f2f6fc;
+ }
+
+ .email-card-content {
+     flex: 1;
+ }
+
+ .email-card-from {
+     font-weight: bold;
+     margin-bottom: 4px;
+ }
+
+ .email-card-subject {
+     font-size: 16px;
+     margin-bottom: 8px;
+ }
+
+ .email-card-body {
+     color: #5f6368;
+     margin-bottom: 8px;
+ }
+
+ .email-card-sentAt {
+     font-size: 12px;
+     color: #5f6368;
+ }
+
+ .email-actions {
+     display: flex;
+     gap: 8px;
+ }
+
+ .email-actions button {
+     background-color: #d93025;
+     color: white;
+     border: none;
+     border-radius: 4px;
+     padding: 8px 12px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+ }
+
+ .email-actions button:hover {
+     background-color: #b71c1c;
+ }
+
+ .email-actions a {
+     color: white;
+     text-decoration: none;
+ }

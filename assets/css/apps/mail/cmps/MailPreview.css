@@ -1,0 +1,41 @@
+.email-card-select-email {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    text-align: start;
+    background-color: #ffffff;
+    color: #202124;
+    box-shadow: rgba(100, 121, 143, 0.12) 0px -1px 0px 0px inset;
+    border-radius: 0px;
+    min-height: 40px;
+    max-height: 50px;
+}
+
+.email-card-from {
+    grid-column: 1 / 2;
+    font-weight: bold;
+    /* Spacing between from and subject */
+}
+
+.email-card-subject-body {
+    grid-column: 2 / 3;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.email-card-subject {
+    font-weight: bold;
+}
+
+.email-card-body {
+    color: #5f6368;
+}
+
+.email-card-sentAt {
+    grid-column: 3 / 4;
+    font-size: 12px;
+    color: #5f6368;
+    margin-left: auto;
+    /* Space between last child and the end */
+}
