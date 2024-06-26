@@ -6,6 +6,10 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
+    saveToStorage,
+    loadFromStorage,
+    getRandomColor,
+    getPrettyRandomColor,
 }
 
 function makeId(length = 6) {
@@ -60,3 +64,28 @@ function getMonthName(date) {
     ]
     return monthNames[date.getMonth()]
 }
+
+function saveToStorage(key, val) {
+    localStorage.setItem(key, JSON.stringify(val))
+}
+
+function loadFromStorage(key) {
+    const data = localStorage.getItem(key)
+    return (data) ? JSON.parse(data) : undefined
+}
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'
+    var color = '#'
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)]
+    }
+    return color
+  }
+
+  function getPrettyRandomColor(){
+    const colors = ['#B4FF9F', '#F9FFA4', '#FFD59E', '#FFA1A1']
+    const randomIndex = Math.floor(Math.random() * colors.length)
+    return colors[randomIndex]
+  }
+
