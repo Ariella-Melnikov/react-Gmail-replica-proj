@@ -3,7 +3,6 @@
  .emails-lst-container {
      display: grid;
      background-color: #f1f3f4;
-     padding: 16px;
  }
 
  .email-card {

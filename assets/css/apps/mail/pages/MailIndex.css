@@ -1,13 +1,20 @@
  /* mail index  */
 
  .mail-index {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
+    display: grid;
+    grid-template-rows: auto 1fr;
     height: 100vh;
 
   }
   
   .mail-header {
+    grid-row: 1;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 100%;
     background-color: #f6f8fc;
     color: #000000;
     padding: 16px;
@@ -21,20 +28,28 @@
     font-weight: bold;
   }
 
+  .main-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    height: 100vh;
+  }
+
   .sidebar {
+    grid-column: 1;
+    grid-row: 2;
     position: fixed;
-    top: 0;
+    /* position: relative; */
+    top: 100px;
     left: 0;
     bottom: 0;
     width: 100px; /* Adjust width as needed */
-    background-color: rgba(240, 240, 240, 0.8); /* Transparent background */
+    background-color: #f6f8fd; /* Transparent background */
     padding-top: 50px; /* Space for the header */
     transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
   }
   
   .sidebar:hover {
     width: 150px; /* Grow on hover */
-    background-color: rgba(240, 240, 240, 1); /* Solid background on hover */
   }
   
   .sidebar ul {
@@ -53,18 +68,37 @@
   }
   
   /* Style buttons inside the sidebar */
-  .sidebar button {
-    display: block;
+  /* .sidebar button {
+    display: fixed;
+    top: 0;
     width: 100%;
     padding: 10px;
     border: none;
-    background-color: #f6f8fc; /* Transparent button */
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
+  } */
+
+  .sidebar button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
   .sidebar button:hover {
-    background-color: #ccc; /* Light background on hover */
+    background-color: #eaebf0; 
+  }
+
+  .button-text {
+    display: none; 
+  }
+  
+  .sidebar-button:hover .button-text {
+    display: inline; 
   }
   
   /* Responsive adjustments */
