@@ -1,35 +1,11 @@
  /* mail index  */
 
  .mail-index {
-   /* display: flex;
-    flex-direction: column; */
-   /* display: grid;
-   grid-template-rows: auto 1fr;
-   height: 100vh; */
    display: flex;
    flex-direction: column;
-   align-items: center; /* Center horizontally */
+   align-items: center; 
    height: 100vh;
 
- }
-
- .mail-header {
-   grid-row: 1;
-   position: fixed;
-   top: 50px;
-   left: 0;
-   width: 100%;
-   background-color: #f6f8fc;
-   color: #000000;
-   padding: 16px;
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
- }
-
- .logo {
-   font-size: 24px;
-   font-weight: bold;
  }
 
  .main-container {
@@ -38,25 +14,21 @@
    max-width: 1200px;
    height: 100vh;
  }
+ .email-card-select-email {
+  grid-column: 2/3;
+}
 
  .sidebar {
-   grid-column: 1;
-   grid-row: 2;
-   position: fixed;
-   /* position: relative; */
-   top: 100px;
-   left: 0;
-   bottom: 0;
+   grid-column: 1/2;
+   grid-row: 1 / -1;
+   position: sticky;
    width: 70px;
-   /* Adjust width as needed */
    background-color: #f6f8fd;
-   /* Transparent background */
    transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
  }
 
  .sidebar:hover {
    width: 150px;
-   /* Grow on hover */
  }
 
  .sidebar ul {
@@ -67,23 +39,6 @@
  .sidebar ul li {
    margin-bottom: 10px;
  }
-
- /* .main-content {
-  display: grid;
-  grid-template-columns: calc(- 70px);
-   transition: margin-left 0.3s ease-in-out;
- } */
-
- /* Style buttons inside the sidebar */
- /* .sidebar button {
-    display: fixed;
-    top: 0;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-  } */
 
  .sidebar button {
    display: flex;

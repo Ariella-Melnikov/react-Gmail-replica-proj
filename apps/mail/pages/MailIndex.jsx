@@ -1,101 +1,136 @@
 import { MailList } from '../cmps/MailList.jsx'
 import { emailService } from '../services/email.service.js'
 import { MailFilter } from '../cmps/MailFilter.jsx'
-import { MailCompose } from './MailCompose.jsx';
-import { MailInbox } from '../cmps/MailInbox.jsx';
-import { MailSent } from '../cmps/MailSent.jsx';
-import { StarredMail } from '../cmps/StarredMail.jsx';
+import { MailCompose } from './MailCompose.jsx'
+import { MailInbox } from '../cmps/MailInbox.jsx'
+import { MailSent } from '../cmps/MailSent.jsx'
+import { StarredMail } from '../cmps/StarredMail.jsx'
 
 const { useState, useEffect } = React
-const { Outlet, NavLink } = ReactRouterDOM
-
 
 export function MailIndex() {
-  const [currentView, setCurrentView] = useState('inbox');
-  const [isComposeOpen, setIsComposeOpen] = useState(false);
-  // const [emails, setEmails] = useState([]);
+  const [currentView, setCurrentView] = useState('inbox')
+  const [isComposeOpen, setIsComposeOpen] = useState(false)
+  const [emails, setEmails] = useState([])
+  const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter())
 
+  useEffect(() => {
+    console.log('loadEmails', emails)
+    loadEmails()
+  }, [currentView])
 
+  useEffect(() => {
+    console.log('emails', emails)
+  }, [emails])
 
-  // useEffect(() => {
-  //   loadEmails();
-  // }, []);
+  useEffect(() => {
+    console.log('filterBy', filterBy)
+  }, [filterBy])
 
-  // function loadEmails() {
-  //   emailService.query().then((emails) => setEmails(emails));
-  // }
+  function onChangeEmail(email) {
+    let emailsNextState = emails.map((e) => (e.id == email.id ? email : e))
+    console.log(emailsNextState)
+    setEmails(emailsNextState)
+  }
+
+  function onChangeFilter(filterBy) {
+    setFilterBy(filterBy)
+  }
+
+  function onChangeEmails(emails) {
+    setEmails(emails)
+  }
+
+  function loadEmails() {
+    switch (currentView) {
+      case 'inbox':
+        emailService
+          .query(filterBy)
+          .then((emails) => onChangeEmails(emails))
+          .catch((err) => {
+            console.error('err:', err)
+          })
+          break
+      case 'sent':
+        emailService
+          .querySentEmail(filterBy)
+          .then((emails) => setEmails(emails))
+          .catch((err) => {
+            console.log('err:', err)
+          })
+          break
+      case 'starred':
+        emailService
+          .query(filterBy)
+          .then((emails) => onChangeEmails(emails))
+          .catch((err) => {
+            console.error('err:', err)
+          })
+          break
+      default:
+        break
+    }
+
+    // TODO: check load from moke
+  }
+
   function renderCurrentView() {
     switch (currentView) {
       case 'inbox':
-        return <MailInbox emails={emails} />;
+        return <MailInbox emails={emails} onChangeEmail={onChangeEmail} onChangeEmails={onChangeEmails} />
       case 'sent':
-        return <MailSent emails={emails} />;
-        case 'starred':
-          return <StarredMail emails={emails} />;
+        return <MailSent emails={emails} onChangeEmail={onChangeEmail} onChangeEmails={onChangeEmails} />
+      case 'starred':
+        return <StarredMail emails={emails} onChangeEmail={onChangeEmail} onChangeEmails={onChangeEmails} />
       default:
-        return <MailInbox emails={emails} />;
+        return <MailInbox emails={emails} onChangeEmail={onChangeEmail} onChangeEmails={onChangeEmails} />
     }
   }
   function handleToggleStar(emailId) {
     emailService.toggleStar(emailId).then(() => {
       setEmails((prevEmails) =>
-        prevEmails.map((email) =>
-          email.id === emailId ? { ...email, isStarred: !email.isStarred } : email
-        )
-      );
-    });
+        prevEmails.map((email) => (email.id === emailId ? { ...email, isStarred: !email.isStarred } : email))
+      )
+    })
   }
-
-  // function renderCurrentView() {
-  //   switch (currentView) {
-  //     case 'inbox':
-  //       return <MailInbox />;
-  //     case 'sent':
-  //       return <MailSent />;
-  //     case 'starred':
-  //       return <StarredMail />;
-  //     default:
-  //       return <MailInbox />;
-  //   }
-  // }
- 
 
   function toggleCompose() {
-    setIsComposeOpen(!isComposeOpen);
+    setIsComposeOpen(!isComposeOpen)
   }
-
-
 
   return (
     <section className='mail-index'>
-    <main className="main-container">
-      <header className='mail-header'>
-        <div>Gmail Logo</div>
-      </header>
-      <aside className='sidebar'>
-        <ul>
-          <li><button onClick={toggleCompose}>
-          <span className="material-icons">edit</span>
-          <span className="button-text">Compose</span>
-            </button></li>
-          <li><button  onClick={() => setCurrentView('inbox')}>
-          <span className="material-icons">inbox</span>
-          <span className="button-text">Inbox</span></button></li>
-          <li><button onClick={() => setCurrentView('sent')}>
-            Sent</button></li>
-            <li><button  onClick={() => setCurrentView('starred')}>
-          <span className="material-icons">star_rate</span>
-          <span className="button-text">Starred</span>
-          </button></li>
-        </ul>
-      </aside>
+      <main className='main-container'>
+        <aside className='sidebar'>
+          <ul>
+            <li>
+              <button onClick={toggleCompose}>
+                <span className='material-icons'>edit</span>
+                <span className='button-text'>Compose</span>
+              </button>
+            </li>
+            <li>
+              <button onClick={() => setCurrentView('inbox')}>
+                <span className='material-icons'>inbox</span>
+                <span className='button-text'>Inbox</span>
+              </button>
+            </li>
+            <li>
+              <button onClick={() => setCurrentView('sent')}>Sent</button>
+            </li>
+            <li>
+              <button onClick={() => setCurrentView('starred')}>
+                <span className='material-icons'>star_rate</span>
+                <span className='button-text'>Starred</span>
+              </button>
+            </li>
+          </ul>
+        </aside>
 
-      <div className='emails-lst-container'>
-        {renderCurrentView()}
-      </div>
-      {/* <MailFilter  filterBy={filterBy} onSetFilter={onSetFilter} /> */}
-      {isComposeOpen && <MailCompose onClose={toggleCompose} />}
-      </main>  
+        <div className='emails-lst-container'>{renderCurrentView()}</div>
+        {/* <MailFilter  filterBy={filterBy} onSetFilter={onSetFilter} /> */}
+        {isComposeOpen && <MailCompose onClose={toggleCompose} />}
+      </main>
     </section>
   )
 }

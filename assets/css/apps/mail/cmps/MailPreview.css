@@ -13,12 +13,32 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+}
+
+.email-card-btn-from {
+    grid-column: 1 / 2;
+    display: flex;
+    align-items: center;
 }
 
 .email-card-from {
-    grid-column: 1 / 2;
     font-weight: bold;
     /* Spacing between from and subject */
+}
+
+.email-starred-btn {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+    margin-inline: start;
+  }
+
+  .material-icons {
+    font-size: 24px;
+    vertical-align: middle;
+    margin-right: 5px;
 }
 
 .email-card-subject-body {
@@ -64,4 +84,9 @@
   .starred-icon, .unstarred-icon {
     font-size: 1em; /* Adjust size as needed */
     color: inherit;   /* Inherit color from parent */
+  }
+
+  .starred-icon{
+    color: yellow; 
+    background-color: yellow;
   }

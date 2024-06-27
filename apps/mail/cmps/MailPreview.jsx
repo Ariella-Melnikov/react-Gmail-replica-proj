@@ -3,8 +3,9 @@ const { useState, useEffect } = React
 
 
 import { emailService } from '../services/email.service.js'
-export function MailPreview({ email }) {
+export function MailPreview({ email, onChangeEmail }) {
 
+  useEffect
 
   if (!email) {
     return null
@@ -27,18 +28,21 @@ export function MailPreview({ email }) {
   }
 
   const handleStarToggle = () => {
-    
     emailService.toggleStar(email.id)
+    email.isStarred = !email.isStarred
+    onChangeEmail(email)
   }
 
   return (
     <article>
       <div className='email-card-select-email'>
         <div className='email-card'>
-          <button  onClick={() => {handleStarToggle()}}>
+          <div className='email-card-btn-from'>
+          <button className='email-starred-btn' onClick={() => {handleStarToggle()}}>
             <span className='material-icons'>{email.isStarred ? 'star' : 'star_border'}</span>
           </button>
           <div className='email-card-from'>{email.from}</div>
+          </div>
           <div className='email-card-subject-body'>
             <div className='email-card-subject'>{email.subject} - </div>
             <div className='email-card-body'> {email.body} </div>

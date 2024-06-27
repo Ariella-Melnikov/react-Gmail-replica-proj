@@ -4,23 +4,12 @@ import { MailFilter } from '../cmps/MailFilter.jsx'
 
 const { useState, useEffect } = React
 
-export function MailSent() {
-  const [emails, setEmails] = useState([])
-  const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter())
+export function MailSent({emails, onChangeEmail}) {
 
   useEffect(() => {
-    loadEmails()
-    console.log('filterBy', filterBy)
-  }, [filterBy])
 
-  function loadEmails() {
-    emailService
-      .querySentEmail(filterBy)
-      .then((emails) => setEmails(emails))
-      .catch((err) => {
-        console.log('err:', err)
-      })
-  }
+  }, [])
+
 
   return (
     <div>
