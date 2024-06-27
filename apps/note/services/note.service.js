@@ -13,6 +13,11 @@ export const noteService = {
     get,
     remove,
     edit,
+    add,
+}
+
+function add(){
+
 }
 
 function edit(NOTES_KEY,noteId){
