@@ -10,7 +10,7 @@ const NEWEMAIL_KEY = 'newMailDB'
 
 export const emailService = {
   query,
-  queryNewEmail,
+  querySentEmail,
   getById,
   remove,
   save,
@@ -25,12 +25,13 @@ function query(filterBy = {}) {
     // If no emails found in storage, use staticEmails and save to storage
     if (!emails || emails.length === 0) {
       return staticEmails.map((email) => ({ ...email }))
+
     }
     return emails
   })
 }
 
-function queryNewEmail(filterBy = {}) {
+function querySentEmail(filterBy = {}) {
   return asyncStorageService.query(NEWEMAIL_KEY).then((emails) => {
     // If no emails found in storage, use staticEmails and save to storage
     if (!emails || emails.length === 0) {
@@ -106,6 +107,7 @@ function remove(emailId) {
 // }
 
 function save(email) {
+  console.log('save', email)
   if (email.id) {
     // Update existing email
     return asyncStorageService.put(EMAIL_KEY, email)
@@ -150,7 +152,6 @@ function getEmptyEmail(to = '', subject = '', body = '') {
   const currentTimestamp = Date.now();
   const timeDiff = 10 * 60 * 1000
   return {
-    id: utilService.makeId(),
     createdAt: currentTimestamp - timeDiff,
     subject,
     body,

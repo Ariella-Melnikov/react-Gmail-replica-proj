@@ -3,15 +3,16 @@
  .emails-lst-container {
      display: grid;
      background-color: #f1f3f4;
-     padding: 16px;
  }
 
  .email-card {
     display: contents;
+    padding: 10px;
+    transition: background-color 0.3s ease;
  }
 
  .email-card:hover {
-     background-color: #f2f6fc;
+    background-color: #f2f6fc;
  }
 
  .email-card-content {
@@ -29,7 +30,7 @@
  }
 
  .email-card-body {
-     color: #5f6368;
+    color: #333;
      margin-bottom: 8px;
  }
 

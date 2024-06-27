@@ -15,7 +15,7 @@ export function MailSent() {
 
   function loadEmails() {
     emailService
-      .queryNewEmail(filterBy)
+      .querySentEmail(filterBy)
       .then((emails) => setEmails(emails))
       .catch((err) => {
         console.log('err:', err)

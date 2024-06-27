@@ -1,8 +1,8 @@
 import { MailList } from './MailList.jsx'
 import { emailService } from '../services/email.service.js'
 import { MailFilter } from '../cmps/MailFilter.jsx'
-
 const { useState, useEffect } = React
+
 
 export function MailInbox() {
   const [emails, setEmails] = useState([])
@@ -24,7 +24,6 @@ export function MailInbox() {
 
   return (
     <div className='main-content'>
-      <h2>Inbox</h2>
       <MailList emails={emails} />
     </div>
   )

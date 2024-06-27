@@ -36,10 +36,16 @@ export function MailIndex() {
       <header className='mail-header'>
         <div>Gmail Logo</div>
       </header>
+      <main className="main-container">
       <aside className='sidebar'>
         <ul>
-          <li><button onClick={toggleCompose}>Compose</button></li>
-          <li><button onClick={() => setCurrentView('inbox')}>Inbox</button></li>
+          <li><button onClick={toggleCompose}>
+            Compose
+            </button></li>
+          <li><button onClick={() => setCurrentView('inbox')}>
+          <span class="material-icons">inbox</span>
+          <span class="button-text">Inbox</span>
+            </button></li>
           <li><button onClick={() => setCurrentView('sent')}>Sent</button></li>
         </ul>
       </aside>
@@ -48,6 +54,7 @@ export function MailIndex() {
       </div>
       {/* <MailFilter  filterBy={filterBy} onSetFilter={onSetFilter} /> */}
       {isComposeOpen && <MailCompose onClose={toggleCompose} />}
+      </main>  
     </section>
   )
 }

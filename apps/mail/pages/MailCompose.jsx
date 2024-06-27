@@ -13,14 +13,16 @@ export function MailCompose({ onClose }) {
   }
 
   function onSendEmail(ev) {
+    console.log('onSendEmail')
     ev.preventDefault()
     emailService
       .save(email)
       .then(() => {
-        showSuccessMsg(`Message sent`)
+        console.log('enter success')
+        showSuccessMsg('Message sent')
         onClose()
       })
-      .catch(() => showErrorMsg(`couldn't send message`))
+      .catch(() => showErrorMsg('couldn\'t send message'))
   }
 
   const { to, subject, body } = email
@@ -38,7 +40,7 @@ export function MailCompose({ onClose }) {
       <label className='send-body' htmlFor='body'>Body:</label>
       <textarea onChange={handleChange} value={body} id='body' name='body' rows='10' />
 
-      <button className='send-btn'>Send</button>
+      <button type='submit' className='send-btn'>Send</button>
       <button type='button' onClick={onClose} className='cancel-btn'>Cancel</button>
     </form>
   </section>
