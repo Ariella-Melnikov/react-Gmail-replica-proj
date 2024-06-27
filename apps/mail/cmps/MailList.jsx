@@ -5,7 +5,8 @@ import { MailPreview } from './MailPreview.jsx'
 export function MailList({ emails, onRemoveMail }) {
   if (!emails || emails.length === 0) return <div>No emails available</div>
   return (
-    <section className='emails-lst-container'>
+    // <section className='emails-lst-container'>
+    <section >
       {emails.map(email => (
         <div key={email.id} className='email-card'>
           <MailPreview email={email} />

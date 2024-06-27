@@ -1,74 +1,81 @@
  /* mail index  */
 
  .mail-index {
-    /* display: flex;
+   /* display: flex;
     flex-direction: column; */
-    display: grid;
-    grid-template-rows: auto 1fr;
-    height: 100vh;
+   /* display: grid;
+   grid-template-rows: auto 1fr;
+   height: 100vh; */
+   display: flex;
+   flex-direction: column;
+   align-items: center; /* Center horizontally */
+   height: 100vh;
 
-  }
-  
-  .mail-header {
-    grid-row: 1;
-    position: fixed;
-    top: 50px;
-    left: 0;
-    width: 100%;
-    background-color: #f6f8fc;
-    color: #000000;
-    padding: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+ }
 
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
+ .mail-header {
+   grid-row: 1;
+   position: fixed;
+   top: 50px;
+   left: 0;
+   width: 100%;
+   background-color: #f6f8fc;
+   color: #000000;
+   padding: 16px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+ }
 
-  .main-container {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    height: 100vh;
-  }
+ .logo {
+   font-size: 24px;
+   font-weight: bold;
+ }
 
-  .sidebar {
-    grid-column: 1;
-    grid-row: 2;
-    position: fixed;
-    /* position: relative; */
-    top: 100px;
-    left: 0;
-    bottom: 0;
-    width: 100px; /* Adjust width as needed */
-    background-color: #f6f8fd; /* Transparent background */
-    padding-top: 50px; /* Space for the header */
-    transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
-  }
-  
-  .sidebar:hover {
-    width: 150px; /* Grow on hover */
-  }
-  
-  .sidebar ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar ul li {
-    margin-bottom: 10px;
-  }
-  
-  .main-content {
-    padding: 20px;
-    margin-left: 30px;
-    transition: margin-left 0.3s ease-in-out;
-  }
-  
-  /* Style buttons inside the sidebar */
-  /* .sidebar button {
+ .main-container {
+   display: grid;
+   grid-template-columns: auto 1fr;
+   max-width: 1200px;
+   height: 100vh;
+ }
+
+ .sidebar {
+   grid-column: 1;
+   grid-row: 2;
+   position: fixed;
+   /* position: relative; */
+   top: 100px;
+   left: 0;
+   bottom: 0;
+   width: 70px;
+   /* Adjust width as needed */
+   background-color: #f6f8fd;
+   /* Transparent background */
+   transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+ }
+
+ .sidebar:hover {
+   width: 150px;
+   /* Grow on hover */
+ }
+
+ .sidebar ul {
+   list-style-type: none;
+   padding: 0;
+ }
+
+ .sidebar ul li {
+   margin-bottom: 10px;
+ }
+
+ /* .main-content {
+  display: grid;
+  grid-template-columns: calc(- 70px);
+   transition: margin-left 0.3s ease-in-out;
+ } */
+
+ /* Style buttons inside the sidebar */
+ /* .sidebar button {
     display: fixed;
     top: 0;
     width: 100%;
@@ -78,36 +85,43 @@
     transition: background-color 0.3s ease-in-out;
   } */
 
-  .sidebar button {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .sidebar button:hover {
-    background-color: #eaebf0; 
-  }
+ .sidebar button {
+   display: flex;
+   align-items: center;
+   width: 100%;
+   padding: 10px;
+   border: none;
+   background-color: transparent;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+ }
 
-  .button-text {
-    display: none; 
-  }
-  
-  .sidebar-button:hover .button-text {
-    display: inline; 
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .sidebar {
-      width: 100px;
-    }
-    
-    .main-content {
-      margin-left: 100px;
-    }
-  }
+ .sidebar button:hover {
+   background-color: #eaebf0;
+ }
+ 
+
+ .button-text {
+   display: none;
+   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+ }
+
+ .sidebar:hover .button-text {
+   display: block;
+ }
+
+ .material-icons {
+  font-size: 24px; /* Adjust icon size */
+  margin-right: 10px; /* Add spacing between icon and text */
+}
+
+ /* Responsive adjustments */
+ @media (max-width: 768px) {
+   .sidebar {
+     width: 100px;
+   }
+
+   .main-content {
+     margin-left: 100px;
+   }
+ }

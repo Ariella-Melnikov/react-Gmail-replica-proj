@@ -9,6 +9,10 @@
     border-radius: 0px;
     min-height: 40px;
     max-height: 50px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .email-card-from {
@@ -21,14 +25,20 @@
     grid-column: 2 / 3;
     display: flex;
     flex-direction: row;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
 }
 
 .email-card-subject {
     font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .email-card-body {
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: #5f6368;
 }
 
@@ -39,3 +49,19 @@
     margin-left: auto;
     /* Space between last child and the end */
 }
+
+.star-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .starred-icon, .unstarred-icon {
+    font-size: 1em; /* Adjust size as needed */
+    color: inherit;   /* Inherit color from parent */
+  }

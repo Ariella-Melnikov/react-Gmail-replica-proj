@@ -2,6 +2,7 @@
 
  .emails-lst-container {
      display: grid;
+     grid-template-columns: calc( - 70px);
      background-color: #f1f3f4;
  }
 

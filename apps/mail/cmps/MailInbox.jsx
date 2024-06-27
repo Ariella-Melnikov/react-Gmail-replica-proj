@@ -3,7 +3,6 @@ import { emailService } from '../services/email.service.js'
 import { MailFilter } from '../cmps/MailFilter.jsx'
 const { useState, useEffect } = React
 
-
 export function MailInbox() {
   const [emails, setEmails] = useState([])
   const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter())
@@ -18,12 +17,15 @@ export function MailInbox() {
       .query(filterBy)
       .then((emails) => setEmails(emails))
       .catch((err) => {
-        console.log('err:', err)
+        console.error('err:', err)
       })
   }
 
+  
+
+
   return (
-    <div className='main-content'>
+    <div>
       <MailList emails={emails} />
     </div>
   )
