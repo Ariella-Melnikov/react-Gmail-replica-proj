@@ -1,3 +1,4 @@
+import { noteService } from "../services/note.service";
 
 const { useState, useEffect, useRef } = React
 
@@ -8,16 +9,21 @@ const { useState, useEffect, useRef } = React
 
 export function NoteAdd({ onNewNoteSaved }) {
     const [subject, setSubject] = useState('');
+    const [content, setContent] = useState('');
 
     const handleSubjectChange = (e) => {
         setSubject(e.target.value);
     };
 
-    // const handleContentChange = (e)
+    const handleContentChange = (e) => {
+        setContent(e.target.value);
+    };
 
     const onNoteSubmit = (e) => {
         e.preventDefault();
-        console.log('Subject:', subject);
+        // console.log('Subject:', subject);
+        // console.log('Content:', content);
+        noteService.addtxtnote(subject,content)
         // Add any additional logic for handling the new note submission here
     };
 
@@ -29,7 +35,7 @@ export function NoteAdd({ onNewNoteSaved }) {
                     id="byText"
                     name="subject"
                     className="input note-add-input-subject"
-                    placeholder="subject"
+                    placeholder="Subject"
                     value={subject}
                     onChange={handleSubjectChange}
                 />
@@ -39,12 +45,12 @@ export function NoteAdd({ onNewNoteSaved }) {
                         id="byText"
                         name="content"
                         className="input note-add-input-content"
-                        placeholder="content"
-                        // value={content}
-                        // onChange={handleContentChange}
+                        placeholder="Content"
+                        value={content}
+                        onChange={handleContentChange}
                     />
                 )}
-                <button type="submit">submit</button>
+                <button type="submit">Submit</button>
             </form>
         </section>
     );
