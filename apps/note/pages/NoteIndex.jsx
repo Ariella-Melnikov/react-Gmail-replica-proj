@@ -1,5 +1,6 @@
 
 import { noteService } from "../services/note.service.js"
+import { AddNote } from "../cmps/AddNote.jsx"
 import { NoteList } from "../cmps/NoteList.jsx";
 import { NoteFilter } from "../cmps/NoteFilter.jsx";
 
@@ -37,6 +38,7 @@ export function NoteIndex() {
         <section className='note-index'>
             <React.Fragment>
                 <NoteFilter/>
+                <AddNote/>
                     <NoteList
                         notes={notes}
                         onRemoveNote={onRemoveNote}

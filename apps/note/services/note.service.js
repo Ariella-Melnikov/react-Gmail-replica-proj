@@ -265,3 +265,15 @@ function createNotes() {
     }
 
 }
+
+
+
+function _createNote(note) {
+    gHardCodedNotes = localStorageService.loadFromStorage(NOTES_KEY);
+
+    gHardCodedNotes.push(note)
+
+
+
+        localStorageService.saveToStorage(NOTES_KEY, gHardCodedNotes);
+    }
