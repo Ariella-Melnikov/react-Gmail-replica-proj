@@ -36,6 +36,7 @@ export function MailIndex() {
       <header className='mail-header'>
         <div>Gmail Logo</div>
       </header>
+      <main>
       <aside className='sidebar'>
         <ul>
           <li><button onClick={toggleCompose}>Compose</button></li>
@@ -48,6 +49,7 @@ export function MailIndex() {
       </div>
       {/* <MailFilter  filterBy={filterBy} onSetFilter={onSetFilter} /> */}
       {isComposeOpen && <MailCompose onClose={toggleCompose} />}
+      </main>  
     </section>
   )
 }

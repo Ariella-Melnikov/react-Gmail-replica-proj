@@ -58,7 +58,7 @@
     width: 100%;
     padding: 10px;
     border: none;
-    background-color: transparent; /* Transparent button */
+    background-color: #f6f8fc; /* Transparent button */
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
   }
@@ -70,10 +70,10 @@
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .sidebar {
-      width: 150px;
+      width: 100px;
     }
     
     .main-content {
-      margin-left: 150px;
+      margin-left: 100px;
     }
   }
