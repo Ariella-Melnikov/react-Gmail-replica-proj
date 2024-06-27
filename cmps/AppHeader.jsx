@@ -1,10 +1,11 @@
 const { Link, NavLink } = ReactRouterDOM
+import logo from '../assets/img/LOGOS/GMAILNOTES.png'
 
 export function AppHeader() {
 
     return <header className="app-header">
         <Link to="/">
-            <h3>LOGO!</h3>
+        <img src="../assets/img/LOGOS/berlink-Gray.svg" alt="" className='logo' />
         </Link>
         <nav>
             <NavLink to="/">Home</NavLink>

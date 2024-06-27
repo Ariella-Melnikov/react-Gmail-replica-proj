@@ -8,6 +8,7 @@ export function NotePreview({ note }) {
     return (
 
         <section style ={note.style} className='note-preview'>
+            <h1>{note.info.subject}</h1>
             <h3>{note.type}</h3>
             <p>{note.info.txt}</p>
 

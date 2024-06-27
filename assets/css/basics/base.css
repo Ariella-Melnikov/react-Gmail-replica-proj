@@ -25,3 +25,15 @@ img {
     width: 100%;
     object-fit: cover;
 }
+
+.logo{
+    position:relative;
+    
+    
+}
+/* 
+.app-header{
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+} */
