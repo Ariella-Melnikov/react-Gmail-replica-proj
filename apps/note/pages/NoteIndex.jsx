@@ -15,7 +15,7 @@ const { useState, useEffect, useRef } = React
 export function NoteIndex() {
 
     const [notes, setNotes] = useState([])
-    const [Modal, isModalVisible] = useState([])
+
 
 
     useEffect(() => {

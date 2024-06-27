@@ -3,6 +3,7 @@ import { NotePreview } from "../cmps/NotePreview.jsx";
 
 
 
+
 export function NoteList({ notes ,onSelectNoteId, onRemoveNote}) {
 
 

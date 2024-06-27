@@ -1,4 +1,4 @@
-import { noteService } from "../services/note.service";
+import { noteService } from "../services/note.service.js";
 
 const { useState, useEffect, useRef } = React
 
@@ -23,7 +23,7 @@ export function NoteAdd({ onNewNoteSaved }) {
         e.preventDefault();
         // console.log('Subject:', subject);
         // console.log('Content:', content);
-        noteService.addtxtnote(subject,content)
+        noteService.createTxtNote(subject,content)
         // Add any additional logic for handling the new note submission here
     };
 
