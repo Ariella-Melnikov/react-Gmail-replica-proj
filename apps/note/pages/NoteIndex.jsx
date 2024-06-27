@@ -1,8 +1,8 @@
 
 import { noteService } from "../services/note.service.js"
-import { AddNote } from "../cmps/AddNote.jsx"
 import { NoteList } from "../cmps/NoteList.jsx";
 import { NoteFilter } from "../cmps/NoteFilter.jsx";
+import { NoteAdd } from "../cmps/AddNote.jsx";
 
 
 const { Link, useSearchParams } = ReactRouterDOM
@@ -15,6 +15,7 @@ const { useState, useEffect, useRef } = React
 export function NoteIndex() {
 
     const [notes, setNotes] = useState([])
+    const [Modal, isModalVisible] = useState([])
 
 
     useEffect(() => {
@@ -38,7 +39,7 @@ export function NoteIndex() {
         <section className='note-index'>
             <React.Fragment>
                 <NoteFilter/>
-                <AddNote/>
+                <NoteAdd/>
                     <NoteList
                         notes={notes}
                         onRemoveNote={onRemoveNote}
