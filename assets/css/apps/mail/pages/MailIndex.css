@@ -16,6 +16,7 @@
  }
  .email-card-select-email {
   grid-column: 2/3;
+  position: sticky;
 }
 
  .sidebar {
