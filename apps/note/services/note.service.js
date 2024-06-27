@@ -12,8 +12,13 @@ export const noteService = {
     query,
     get,
     remove,
+    edit,
 }
 
+function edit(NOTES_KEY,noteId){
+    
+
+}
  
 
 function query() {
