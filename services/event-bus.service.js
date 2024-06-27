@@ -29,6 +29,14 @@ export function showErrorMsg(txt) {
     showUserMsg({ txt, type: 'error' })
 }
 
+// export function showSuccessMsgMail(txt, withUndo = false) {
+//     showUserMsg({ txt, type: 'success', withUndo });
+//   }
+  
+//   export function showErrorMsgMail(txt, withExit = false) {
+//     showUserMsg({ txt, type: 'error', withExit });
+//   }
+
 
 // Service Testing:
 // eventBus.on('muk', (data)=>{

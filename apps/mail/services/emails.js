@@ -7,7 +7,7 @@ export const emails = [
       isRead: false,
       isStarred: false,
       sentAt: 1715593200000,
-      removedAt: null,
+      isRemoved: true,
       from: 'momo@momo.com',
       to: 'user@appsus.com'
     },
@@ -19,7 +19,7 @@ export const emails = [
       isRead: true,
       isStarred: false,
       sentAt: 1715578800000,
-      removedAt: null,
+      isRemoved: null,
       from: 'project@appsus.com',
       to: 'user@appsus.com'
     },
@@ -31,7 +31,7 @@ export const emails = [
       isRead: false,
       isStarred: false,
       sentAt: 1551133950594,
-      removedAt: null,
+      isRemoved: null,
       from: 'friend@appsus.com',
       to: 'user@appsus.com'
     },
@@ -43,7 +43,7 @@ export const emails = [
       isRead: false,
       isStarred: false,
       sentAt: 1551133960594,
-      removedAt: null,
+      isRemoved: null,
       from: 'support@appsus.com',
       to: 'user@appsus.com'
     },
@@ -55,7 +55,7 @@ export const emails = [
       isRead: true,
       isStarred: false,
       sentAt: 1551133970594,
-      removedAt: null,
+      isRemoved: null,
       from: 'manager@appsus.com',
       to: 'user@appsus.com'
     },
@@ -67,7 +67,7 @@ export const emails = [
       isRead: false,
       isStarred: false,
       sentAt: 1551133980594,
-      removedAt: null,
+      isRemoved: null,
       from: 'travel@appsus.com',
       to: 'user@appsus.com'
     },
@@ -79,7 +79,7 @@ export const emails = [
       isRead: true,
       isStarred: false,
       sentAt: 1551133990594,
-      removedAt: null,
+      isRemoved: null,
       from: 'service@appsus.com',
       to: 'user@appsus.com'
     },
@@ -91,7 +91,7 @@ export const emails = [
       isRead: true,
       isStarred: false,
       sentAt: 1551134000594,
-      removedAt: null,
+      isRemoved: null,
       from: 'security@appsus.com',
       to: 'user@appsus.com'
     },
@@ -103,7 +103,7 @@ export const emails = [
       isRead: false,
       isStarred: true,
       sentAt: 1551134010594,
-      removedAt: null,
+      isRemoved: null,
       from: 'orders@appsus.com',
       to: 'user@appsus.com'
     },
@@ -115,7 +115,7 @@ export const emails = [
       isRead: true,
       isStarred: true,
       sentAt: 1551134020594,
-      removedAt: null,
+      isRemoved: null,
       from: 'hr@appsus.com',
       to: 'user@appsus.com'
     },
@@ -126,7 +126,7 @@ export const emails = [
       body: 'Would love to catch up sometimes',
       isRead: false,
       sentAt: 1715593200000,
-      removedAt: null,
+      isRemoved: null,
       from: 'user@appsus.com' ,
       to: 'momo@momo.com'
     },
@@ -137,7 +137,7 @@ export const emails = [
       body: 'Please review the latest project updates at your earliest.',
       isRead: true,
       sentAt: 1715578800000,
-      removedAt: null,
+      isRemoved: null,
       from: 'user@appsus.com',
       to: 'project@appsus.com'
     },
@@ -148,7 +148,7 @@ export const emails = [
       body: 'Hope you have a fantastic day filled with joy and laughter!',
       isRead: false,
       sentAt: 1551133950594,
-      removedAt: null,
+      isRemoved: null,
       from: 'user@appsus.com',
       to:  'friend@appsus.com'
     },

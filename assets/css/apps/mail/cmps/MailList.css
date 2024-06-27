@@ -33,6 +33,7 @@
  .email-card-body {
     color: #333;
      margin-bottom: 8px;
+     
  }
 
  .email-card-sentAt {
@@ -40,7 +41,7 @@
      color: #5f6368;
  }
 
- .email-actions {
+ /* .email-actions {
      display: flex;
      gap: 8px;
  }
@@ -62,4 +63,32 @@
  .email-actions a {
      color: white;
      text-decoration: none;
- }
+ } */
+
+ .email-actions {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px; /* Adjust position as needed */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    display: none;
+  }
+  
+  .email-card:hover .email-actions {
+    display: block;
+  }
+  
+  .email-actions button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 5px;
+  }
+  
+  .email-actions button:hover {
+    background-color: #ddd; /* Example hover background color */
+  }

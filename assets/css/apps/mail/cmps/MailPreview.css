@@ -39,6 +39,13 @@
     margin-right: 5px;
 }
 
+.material-symbol {
+    font-size: 24px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+
 .email-card-subject-body {
     grid-column: 2 / 3;
     display: flex;

@@ -5,6 +5,9 @@ import { MailCompose } from './MailCompose.jsx'
 import { MailInbox } from '../cmps/MailInbox.jsx'
 import { MailSent } from '../cmps/MailSent.jsx'
 import { StarredMail } from '../cmps/StarredMail.jsx'
+import { TrashMail } from '../cmps/TrashMail.jsx'
+import { showSuccessMsg } from '../../../services/event-bus.service.js'
+import { showErrorMsg } from '../../../services/event-bus.service.js'
 
 const { useState, useEffect } = React
 
@@ -27,15 +30,39 @@ export function MailIndex() {
     console.log('filterBy', filterBy)
   }, [filterBy])
 
+  // function handleExitUserMessage(msg) {
+  //   showErrorMsgMail( msg, true);
+  // }
+
+  // function handleUndoMessage(msg) {
+  //   showSuccessMsg(msg, true);
+  // }
+
   function onChangeEmail(email) {
     let emailsNextState = emails.map((e) => (e.id == email.id ? email : e))
     console.log(emailsNextState)
     setEmails(emailsNextState)
   }
 
-  function onChangeFilter(filterBy) {
-    setFilterBy(filterBy)
+  function onRemoveMail(emailId) {
+    const email = emails.find((email) => email.id === emailId);
+    if (email.isRemoved) {
+      emailService.remove(emailId).then(() => {
+        setEmails((emails) => emails.filter((email) => email.id !== emailId));
+      });
+    } else {
+      setEmails((emails) =>
+        emails.map((email) =>
+          email.id === emailId ? { ...email, isRemoved: true } : email
+        )
+      );
+    }
   }
+
+
+  // function onChangeFilter(filterBy) {
+  //   setFilterBy(filterBy)
+  // }
 
   function onChangeEmails(emails) {
     setEmails(emails)
@@ -50,7 +77,7 @@ export function MailIndex() {
           .catch((err) => {
             console.error('err:', err)
           })
-          break
+        break
       case 'sent':
         emailService
           .query(filterBy)
@@ -58,7 +85,7 @@ export function MailIndex() {
           .catch((err) => {
             console.log('err:', err)
           })
-          break
+        break
       case 'starred':
         emailService
           .query(filterBy)
@@ -66,7 +93,15 @@ export function MailIndex() {
           .catch((err) => {
             console.error('err:', err)
           })
-          break
+        break
+      case 'trash':
+        emailService
+          .query(filterBy)
+          .then((emails) => onChangeEmails(emails))
+          .catch((err) => {
+            console.error('err:', err)
+          })
+        break
       default:
         break
     }
@@ -77,22 +112,24 @@ export function MailIndex() {
   function renderCurrentView() {
     switch (currentView) {
       case 'inbox':
-        return <MailInbox emails={emails} onChangeEmail={onChangeEmail} onChangeEmails={onChangeEmails} />
+        return <MailInbox emails={emails} onChangeEmail={onChangeEmail} onRemoveMail={onRemoveMail}  />
       case 'sent':
-        return <MailSent emails={emails} onChangeEmail={onChangeEmail} onChangeEmails={onChangeEmails} />
+        return <MailSent emails={emails} onChangeEmail={onChangeEmail} onRemoveMail={onRemoveMail} />
       case 'starred':
-        return <StarredMail emails={emails} onChangeEmail={onChangeEmail} onChangeEmails={onChangeEmails} />
+        return <StarredMail emails={emails} onChangeEmail={onChangeEmail} onRemoveMail={onRemoveMail}  />
+      case 'trash':
+        return <TrashMail emails={emails}  onChangeEmail={onChangeEmail} onRemoveMail={onRemoveMail} />
       default:
-        return <MailInbox emails={emails} onChangeEmail={onChangeEmail} onChangeEmails={onChangeEmails} />
+        return <MailInbox emails={emails} onChangeEmail={onChangeEmail} onRemoveMail={onRemoveMail}  />
     }
   }
-  function handleToggleStar(emailId) {
-    emailService.toggleStar(emailId).then(() => {
-      setEmails((prevEmails) =>
-        prevEmails.map((email) => (email.id === emailId ? { ...email, isStarred: !email.isStarred } : email))
-      )
-    })
-  }
+  // function handleToggleStar(emailId) {
+  //   emailService.toggleStar(emailId).then(() => {
+  //     setEmails((prevEmails) =>
+  //       prevEmails.map((email) => (email.id === emailId ? { ...email, isStarred: !email.isStarred } : email))
+  //     )
+  //   })
+  // }
 
   function toggleCompose() {
     setIsComposeOpen(!isComposeOpen)
@@ -122,9 +159,15 @@ export function MailIndex() {
               </button>
             </li>
             <li>
-            <button onClick={() => setCurrentView('sent')}>
+              <button onClick={() => setCurrentView('sent')}>
                 <span className='material-icons'>send_border</span>
                 <span className='button-text'>Send</span>
+              </button>
+            </li>
+            <li>
+              <button onClick={() => setCurrentView('trash')}>
+                <span className='material-symbol'>delete</span>
+                <span className='button-text'>Trash</span>
               </button>
             </li>
           </ul>

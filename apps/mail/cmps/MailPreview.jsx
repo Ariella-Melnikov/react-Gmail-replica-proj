@@ -3,7 +3,7 @@ const { useState, useEffect } = React
 
 
 import { emailService } from '../services/email.service.js'
-export function MailPreview({ email, onChangeEmail }) {
+export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
 
   useEffect
 
@@ -33,14 +33,28 @@ export function MailPreview({ email, onChangeEmail }) {
     onChangeEmail(email)
   }
 
+  const renderActionButton = () => {
+    if (showRemoveButton) {
+      return (
+        <button className='material-icons' onClick={() => onRemoveMail(email.id)}>
+          trash
+        </button>
+      );
+    } else {
+      return (
+        <button className='email-starred-btn' onClick={handleStarToggle}>
+          <span>{email.isStarred ? <span className='material-icons custom-icon'>star</span> : <span className='material-icons'>star_border</span>}</span>
+        </button>
+      );
+    }
+  };
+
   return (
     <article>
       <div className='email-card-select-email'>
-        <div className='email-card'>
+        {/* <div className='email-card'> */}
           <div className='email-card-btn-from'>
-          <button className='email-starred-btn' onClick={() => {handleStarToggle()}}>
-            <span>{email.isStarred ? <span className='material-icons custom-icon'> star </span> : <span className='material-icons'>star_border</span>}</span>
-          </button>
+          {renderActionButton()}
           <div className='email-card-from'>{email.from}</div>
           </div>
           <div className='email-card-subject-body'>
@@ -48,7 +62,7 @@ export function MailPreview({ email, onChangeEmail }) {
             <div className='email-card-body'> {email.body} </div>
           </div>
           <div className='email-card-sentAt'> {formatDate(email.sentAt)} </div>
-        </div>
+        {/* </div> */}
       </div> 
     </article>
   )
