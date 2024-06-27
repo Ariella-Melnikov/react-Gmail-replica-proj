@@ -1,4 +1,4 @@
-
+import {showModal} from "../cmps/AddModal.jsx"
 
 export function AddNote() {
 
@@ -7,6 +7,6 @@ export function AddNote() {
 
 
     return (
-        <button>addNote</button>
+        <button onClick={showModal}>addNote</button>
     )
 }
