@@ -9,6 +9,10 @@
     border-radius: 0px;
     min-height: 40px;
     max-height: 50px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .email-card-from {
@@ -21,14 +25,20 @@
     grid-column: 2 / 3;
     display: flex;
     flex-direction: row;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
 }
 
 .email-card-subject {
     font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .email-card-body {
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: #5f6368;
 }
 
