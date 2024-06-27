@@ -118,13 +118,7 @@ export const emails = [
       removedAt: null,
       from: 'hr@appsus.com',
       to: 'user@appsus.com'
-    }
-  ];
-
-
-
-
-  export const newEmails = [
+    },
     {
       id: 'e111',
       createdAt: 1551133930500,
@@ -158,5 +152,7 @@ export const emails = [
       from: 'user@appsus.com',
       to:  'friend@appsus.com'
     },
-  ]
+  ];
+
+
   

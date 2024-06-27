@@ -6,11 +6,9 @@ import { asyncStorageService } from '../../../services/async-storage.service.js'
 import { utilService } from '../../../services/util.service.js'
 
 const EMAIL_KEY = 'mailDB'
-const NEWEMAIL_KEY = 'newMailDB'
 
 export const emailService = {
   query,
-  querySentEmail,
   getById,
   remove,
   save,
@@ -33,17 +31,17 @@ function query(filterBy = {}) {
   })
 }
 
-function querySentEmail(filterBy = {}) {
-  return asyncStorageService.query(NEWEMAIL_KEY).then((emails) => {
-    // If no emails found in storage, use staticEmails and save to storage
-    if (!emails || emails.length === 0) {
-      emails =  staticNewEmails.map((email) => ({ 
-        ...email }))
-        storageService.saveToStorage(NEWEMAIL_KEY, emails)
-    }
-    return emails
-  })
-}
+// function querySentEmail(filterBy = {}) {
+//   return asyncStorageService.query(NEWEMAIL_KEY).then((emails) => {
+//     // If no emails found in storage, use staticEmails and save to storage
+//     if (!emails || emails.length === 0) {
+//       emails =  staticNewEmails.map((email) => ({ 
+//         ...email }))
+//         storageService.saveToStorage(NEWEMAIL_KEY, emails)
+//     }
+//     return emails
+//   })
+// }
 
 // // Apply filters
 // if (filterBy.status) {
@@ -109,7 +107,7 @@ function save(email) {
   } else {
     const newEmail = _createEmail(email.to, email.subject, email.body)
     newEmail.isSent = true // Mark the email as sent
-    return asyncStorageService.post(NEWEMAIL_KEY, newEmail)
+    return asyncStorageService.post(EMAIL_KEY, newEmail)
   }
 }
 

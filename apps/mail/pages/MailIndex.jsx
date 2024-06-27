@@ -53,7 +53,7 @@ export function MailIndex() {
           break
       case 'sent':
         emailService
-          .querySentEmail(filterBy)
+          .query(filterBy)
           .then((emails) => setEmails(emails))
           .catch((err) => {
             console.log('err:', err)
@@ -120,7 +120,7 @@ export function MailIndex() {
             </li>
             <li>
               <button onClick={() => setCurrentView('starred')}>
-                <span className='material-icons'>star_rate</span>
+                <span className='material-icons'>star_border</span>
                 <span className='button-text'>Starred</span>
               </button>
             </li>

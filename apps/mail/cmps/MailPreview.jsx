@@ -39,7 +39,7 @@ export function MailPreview({ email, onChangeEmail }) {
         <div className='email-card'>
           <div className='email-card-btn-from'>
           <button className='email-starred-btn' onClick={() => {handleStarToggle()}}>
-            <span className='material-icons'>{email.isStarred ? 'star' : 'star_border'}</span>
+            <span>{email.isStarred ? <span className='material-icons custom-icon'> star </span> : <span className='material-icons'>star_border</span>}</span>
           </button>
           <div className='email-card-from'>{email.from}</div>
           </div>
@@ -49,7 +49,7 @@ export function MailPreview({ email, onChangeEmail }) {
           </div>
           <div className='email-card-sentAt'> {formatDate(email.sentAt)} </div>
         </div>
-      </div>
+      </div> 
     </article>
   )
 }

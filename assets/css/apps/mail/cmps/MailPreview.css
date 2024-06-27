@@ -81,12 +81,11 @@
     justify-content: center;
   }
   
-  .starred-icon, .unstarred-icon {
-    font-size: 1em; /* Adjust size as needed */
-    color: inherit;   /* Inherit color from parent */
+  .star-icon {
+    width: 1rem; /* Adjust the size as needed */
+    height: 1rem;
   }
 
-  .starred-icon{
-    color: yellow; 
-    background-color: yellow;
+  .custom-icon {
+    color: #f2cb4c;
   }

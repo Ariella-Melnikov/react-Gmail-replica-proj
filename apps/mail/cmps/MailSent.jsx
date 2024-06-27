@@ -1,19 +1,15 @@
 import { MailList } from './MailList.jsx'
-import { emailService } from '../services/email.service.js'
-import { MailFilter } from '../cmps/MailFilter.jsx'
 
 const { useState, useEffect } = React
 
 export function MailSent({emails, onChangeEmail}) {
 
-  useEffect(() => {
-
-  }, [])
+  emails = emails.filter(e => e.from === 'user@appsus.com')
 
 
   return (
     <div>
-      <MailList emails={emails} />
+      <MailList emails={emails} onChangeEmail={onChangeEmail} />
     </div>
   )
 }
