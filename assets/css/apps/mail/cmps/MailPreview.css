@@ -13,7 +13,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
 }
 
 .email-card-btn-from {
@@ -24,7 +23,6 @@
 
 .email-card-from {
     font-weight: bold;
-    /* Spacing between from and subject */
 }
 
 .email-starred-btn {
@@ -67,7 +65,6 @@
     font-size: 12px;
     color: #5f6368;
     margin-left: auto;
-    /* Space between last child and the end */
 }
 
 .star-btn {
@@ -82,7 +79,7 @@
   }
   
   .star-icon {
-    width: 1rem; /* Adjust the size as needed */
+    width: 1rem; 
     height: 1rem;
   }
 

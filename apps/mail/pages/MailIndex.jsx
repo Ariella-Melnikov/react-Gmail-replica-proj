@@ -116,12 +116,15 @@ export function MailIndex() {
               </button>
             </li>
             <li>
-              <button onClick={() => setCurrentView('sent')}>Sent</button>
-            </li>
-            <li>
               <button onClick={() => setCurrentView('starred')}>
                 <span className='material-icons'>star_border</span>
                 <span className='button-text'>Starred</span>
+              </button>
+            </li>
+            <li>
+            <button onClick={() => setCurrentView('sent')}>
+                <span className='material-icons'>send_border</span>
+                <span className='button-text'>Send</span>
               </button>
             </li>
           </ul>

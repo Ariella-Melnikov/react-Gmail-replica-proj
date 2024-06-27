@@ -2,8 +2,8 @@
 
  .emails-lst-container {
      display: grid;
-     grid-template-columns: calc( - 70px);
-     background-color: #f1f3f4;
+     height: 100vh; 
+     width: calc(100vw - 3.472vw);
  }
 
  .email-card {

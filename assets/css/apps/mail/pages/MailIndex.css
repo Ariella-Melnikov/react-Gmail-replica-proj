@@ -11,21 +11,23 @@
  .main-container {
    display: grid;
    grid-template-columns: auto 1fr;
-   max-width: 1200px;
+   width: calc(100vw - 3.472vw );
    height: 100vh;
+   margin-left: 100px;
  }
- .email-card-select-email {
-  grid-column: 2/3;
-  position: sticky;
-}
+
 
  .sidebar {
    grid-column: 1/2;
    grid-row: 1 / -1;
-   position: sticky;
-   width: 70px;
+   position: fixed;
+   top: 85px;
+   left: 0; 
+   bottom: 0;
+   width: 3.472vw;
    background-color: #f6f8fd;
-   transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+   transition: width 0.1s ease-in-out, background-color 0.2s ease-in-out; 
+   overflow: hidden;
  }
 
  .sidebar:hover {
@@ -50,6 +52,7 @@
    background-color: transparent;
    cursor: pointer;
    transition: background-color 0.3s ease;
+   overflow: hidden;
  }
 
  .sidebar button:hover {
@@ -58,26 +61,19 @@
  
 
  .button-text {
-   display: none;
-   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  opacity: 0; 
+  transition: opacity 0.8s ease-in-out; 
  }
 
  .sidebar:hover .button-text {
-   display: block;
+  opacity: 1; 
+
  }
 
  .material-icons {
-  font-size: 24px; /* Adjust icon size */
-  margin-right: 10px; /* Add spacing between icon and text */
+  font-size: 24px; 
+  margin-right: 10px; 
 }
 
- /* Responsive adjustments */
- @media (max-width: 768px) {
-   .sidebar {
-     width: 100px;
-   }
 
-   .main-content {
-     margin-left: 100px;
-   }
- }
+
