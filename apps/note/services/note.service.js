@@ -2,22 +2,22 @@
 
 import { storageService } from '../../../services/storage.service.js'
 import { asyncStorageService } from '../../../services/async-storage.service.js'
+import { utilService } from '../../../services/util.service.js'
 
 
 let gHardCodedNotes
 const NOTES_KEY = 'noteDB'
+const NEW_NOTES_KEY = 'newnoteDB'
 createNotes()
 
 export const noteService = {
     query,
+    queryNewNote,
     get,
     remove,
-    addtxtnote,
+    createTxtNote,
 }
 
-function addtxtnote(subject,content){
-console.log(subject,content)
-}
 
 
  
@@ -30,6 +30,10 @@ function query() {
     })
 }
 
+function queryNewNote(){
+
+}
+
 
 function get(noteId) {
     return asyncStorageService.get(NOTES_KEY, noteId)
@@ -38,6 +42,30 @@ function get(noteId) {
 function remove(noteId) {
     return asyncStorageService.remove(NOTES_KEY, noteId)
 }
+
+
+async function createTxtNote(subject, content) {
+    let notes = await asyncStorageService.query(NOTES_KEY)
+    let note = {
+        id: utilService.makeId(),
+        createdAt: Date.now(),
+        type: 'NoteTxt',
+        isPinned: false,
+        style: {
+            backgroundColor: utilService.getRandomColor()
+        },
+        info: {
+            txt: content,
+            subject: subject,
+        }
+    }
+
+    console.log(note)
+    notes.push(note)
+    await asyncStorageService.post(NOTES_KEY, note)
+}
+
+
 function createNotes() {
     gHardCodedNotes = storageService.loadFromStorage(NOTES_KEY);
     if (!gHardCodedNotes || !gHardCodedNotes.length) {
@@ -291,13 +319,3 @@ function createNotes() {
 }
 
 
-
-function _createNote(note) {
-    gHardCodedNotes = localStorageService.loadFromStorage(NOTES_KEY);
-
-    gHardCodedNotes.push(note)
-
-
-
-        localStorageService.saveToStorage(NOTES_KEY, gHardCodedNotes);
-    }
