@@ -23,8 +23,7 @@ export function MailSent() {
   }
 
   return (
-    <div className='main-content'>
-      <h2>Inbox</h2>
+    <div>
       <MailList emails={emails} />
     </div>
   )

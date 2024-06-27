@@ -3,8 +3,12 @@
  .mail-index {
    /* display: flex;
     flex-direction: column; */
-   display: grid;
+   /* display: grid;
    grid-template-rows: auto 1fr;
+   height: 100vh; */
+   display: flex;
+   flex-direction: column;
+   align-items: center; /* Center horizontally */
    height: 100vh;
 
  }
@@ -31,6 +35,7 @@
  .main-container {
    display: grid;
    grid-template-columns: auto 1fr;
+   max-width: 1200px;
    height: 100vh;
  }
 
@@ -42,12 +47,10 @@
    top: 100px;
    left: 0;
    bottom: 0;
-   width: 100px;
+   width: 70px;
    /* Adjust width as needed */
    background-color: #f6f8fd;
    /* Transparent background */
-   padding-top: 50px;
-   /* Space for the header */
    transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
  }
 
@@ -65,11 +68,11 @@
    margin-bottom: 10px;
  }
 
- .main-content {
-   padding: 20px;
-   margin-left: 30px;
+ /* .main-content {
+  display: grid;
+  grid-template-columns: calc(- 70px);
    transition: margin-left 0.3s ease-in-out;
- }
+ } */
 
  /* Style buttons inside the sidebar */
  /* .sidebar button {
@@ -103,7 +106,7 @@
    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
  }
 
- .sidebar button:hover .button-text {
+ .sidebar:hover .button-text {
    display: block;
  }
 

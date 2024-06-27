@@ -18,14 +18,16 @@ export const emailService = {
   setFilterBy,
   getDefaultFilter,
   getEmptyEmail,
+  toggleStar,
 }
 
 function query(filterBy = {}) {
   return asyncStorageService.query(EMAIL_KEY).then((emails) => {
     // If no emails found in storage, use staticEmails and save to storage
     if (!emails || emails.length === 0) {
-      return staticEmails.map((email) => ({ ...email }))
-
+      emails =  staticEmails.map((email) => ({ 
+        ...email }))
+        storageService.saveToStorage(EMAIL_KEY, emails)
     }
     return emails
   })
@@ -35,7 +37,9 @@ function querySentEmail(filterBy = {}) {
   return asyncStorageService.query(NEWEMAIL_KEY).then((emails) => {
     // If no emails found in storage, use staticEmails and save to storage
     if (!emails || emails.length === 0) {
-      return staticNewEmails.map((email) => ({ ...email }))
+      emails =  staticNewEmails.map((email) => ({ 
+        ...email }))
+        storageService.saveToStorage(NEWEMAIL_KEY, emails)
     }
     return emails
   })
@@ -97,22 +101,12 @@ function remove(emailId) {
   return asyncStorageService.remove(EMAIL_KEY, emailId)
 }
 
-// function save(email) {
-//   if (email.id) {
-//     return asyncStorageService.put(EMAIL_KEY, email)
-//   } else {
-//     const newEmail = _createEmail(email.subject, email.body)
-//     return asyncStorageService.post(EMAIL_KEY, newEmail)
-//   }
-// }
 
 function save(email) {
   console.log('save', email)
   if (email.id) {
-    // Update existing email
     return asyncStorageService.put(EMAIL_KEY, email)
   } else {
-    // Create new email
     const newEmail = _createEmail(email.to, email.subject, email.body)
     newEmail.isSent = true // Mark the email as sent
     return asyncStorageService.post(NEWEMAIL_KEY, newEmail)
@@ -130,7 +124,14 @@ function setFilterBy(filterBy = {}) {
 }
 
 function getDefaultFilter() {
-  return { status: '', txt: '', isRead: '', isStarred: '', lables: '' } // Example default filter values
+  return { status: 'all', txt: '', isRead: false, isStarred: false, lables: [] } // Example default filter values
+}
+
+function toggleStar(emailId) {
+  return getById(emailId).then(email => {
+    email.isStarred = !email.isStarred;
+    return save(email);
+  });
 }
 
 function _createEmail(to, subject, body) {
@@ -140,6 +141,7 @@ function _createEmail(to, subject, body) {
     createdAt: currentTimestamp,
     subject,
     body,
+    isStarred: false,
     isRead: false,
     sentAt: currentTimestamp,
     removedAt: null,
