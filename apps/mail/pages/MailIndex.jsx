@@ -10,12 +10,14 @@ import { showSuccessMsg } from '../../../services/event-bus.service.js'
 import { showErrorMsg } from '../../../services/event-bus.service.js'
 
 const { useState, useEffect } = React
+const {useNavigate} = ReactRouterDOM
 
 export function MailIndex() {
   const [currentView, setCurrentView] = useState('inbox')
   const [isComposeOpen, setIsComposeOpen] = useState(false)
   const [emails, setEmails] = useState([])
   const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter())
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log('loadEmails', emails)
@@ -135,6 +137,11 @@ export function MailIndex() {
     setIsComposeOpen(!isComposeOpen)
   }
 
+  function handleButtonClick(navigationLink) {
+    navigate(navigationLink)
+    setCurrentView(navigationLink)
+  }
+
   return (
     <section className='mail-index'>
       <main className='main-container'>
@@ -147,25 +154,25 @@ export function MailIndex() {
               </button>
             </li>
             <li>
-              <button onClick={() => setCurrentView('inbox')}>
+              <button onClick={() => handleButtonClick('inbox')}>
                 <span className='material-symbols-outlined'>inbox</span>
                 <span className='button-text'>Inbox</span>
               </button>
             </li>
             <li>
-              <button onClick={() => setCurrentView('starred')}>
+              <button onClick={() => handleButtonClick('starred')}>
                 <span className='material-symbols-outlined'>star</span>
                 <span className='button-text'>Starred</span>
               </button>
             </li>
             <li>
-              <button onClick={() => setCurrentView('sent')}>
+              <button onClick={() => handleButtonClick('sent')}>
                 <span className='material-symbols-outlined'>send</span>
                 <span className='button-text'>Send</span>
               </button>
             </li>
             <li>
-              <button onClick={() => setCurrentView('trash')}>
+              <button onClick={() => handleButtonClick('trash')}>
                 <span className='material-symbols-outlined'>delete</span>
                 <span className='button-text'>Trash</span>
               </button>
