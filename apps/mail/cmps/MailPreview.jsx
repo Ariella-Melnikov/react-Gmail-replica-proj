@@ -1,20 +1,14 @@
-
 const { useState, useEffect } = React
 
-
 import { emailService } from '../services/email.service.js'
-export function MailPreview({ email, onChangeEmail,  showRemoveButton }) {
-
+export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
   useEffect(() => {
-console.log('I enter the useEffect on preview mail')
-  }, []);
+    console.log('I enter the useEffect on preview mail')
+  }, [])
 
   if (!email) {
     return null
   }
-
-
-
 
   function formatDate(sentAt) {
     const date = new Date(sentAt)
@@ -38,10 +32,11 @@ console.log('I enter the useEffect on preview mail')
     onChangeEmail(email)
   }
 
-  const handleRemoveMail  = () => { 
-    emailService.toggleTrash(email.id)
-    onChangeEmail(email);
-  };
+  const handleRemoveMail = () => {
+    emailService.toggleTrash(email.id).then(() => {
+      onChangeEmail(email)
+    })
+  }
 
   // const renderActionButton = () => {
   //   if (showRemoveButton) {
@@ -52,7 +47,7 @@ console.log('I enter the useEffect on preview mail')
   //     );
   //   } else {
   //     return (
-     
+
   //     );
   //   }
   // };
@@ -61,24 +56,32 @@ console.log('I enter the useEffect on preview mail')
     <article>
       <div className='email-card-select-email'>
         {/* <div className='email-card'> */}
-          <div className='email-card-btn-from'>
+        <div className='email-card-btn-from'>
           {/* {renderActionButton()} */}
           <button className='email-starred-btn' onClick={handleStarToggle}>
-          <span>{email.isStarred ? <span className='material-icons custom-icon'>star</span> : <span className='material-symbols-outlined'>star_border</span>}</span>
-        </button>
+            <span>
+              {email.isStarred ? (
+                <span className='material-icons custom-icon'>star</span>
+              ) : (
+                <span className='material-symbols-outlined'>star_border</span>
+              )}
+            </span>
+          </button>
           <div className='email-card-from'>{email.from}</div>
-          </div>
-          <div className='email-card-subject-body'>
-            <div className='email-card-subject'>{email.subject} - </div>
-            <div className='email-card-body'> {email.body} </div>
-          </div>
-          <div className='email-card-sentAt'> {formatDate(email.sentAt)} </div>
-          <div className="email-actions">
-          <button className='material-symbols-outlined' onClick={handleRemoveMail}>delete</button>
-          </div>
+        </div>
+        <div className='email-card-subject-body'>
+          <div className='email-card-subject'>{email.subject} - </div>
+          <div className='email-card-body'> {email.body} </div>
+        </div>
+        <div className='email-card-sentAt'> {formatDate(email.sentAt)} </div>
+        <div className='email-actions'>
+          <button className='material-symbols-outlined' onClick={handleRemoveMail}>
+            delete
+          </button>
+        </div>
 
         {/* </div> */}
-      </div> 
+      </div>
     </article>
   )
 }

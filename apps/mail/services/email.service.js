@@ -137,10 +137,9 @@ function toggleTrash(emailId) {
   return getById(emailId).then(email => {
     if (email.isRemoved) {
       return remove(emailId)
-    } else {
-      email.isRemoved = true
-      
     }
+    
+    email.isRemoved = true
     return save(email)
   } )
 }

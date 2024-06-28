@@ -46,22 +46,6 @@ export function MailIndex() {
     setEmails(emailsNextState)
   }
 
-  // function onRemoveMail(emailId) {
-  //   const email = emails.find((email) => email.id === emailId);
-  //   if (email.isRemoved) {
-  //     emailService.remove(emailId).then(() => {
-  //       setEmails((emails) => emails.filter((email) => email.id !== emailId));
-  //     });
-  //   } else {
-  //     setEmails((emails) =>
-  //       emails.map((email) =>
-  //         email.id === emailId ? { ...email, isRemoved: true } : email
-  //       )
-  //     );
-  //   }
-  // }
-
-
   // function onChangeFilter(filterBy) {
   //   setFilterBy(filterBy)
   // }
