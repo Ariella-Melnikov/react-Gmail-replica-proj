@@ -6,15 +6,26 @@
      width: calc(100vw - 3.472vw);
  }
 
- .email-card {
+ /* .email-card {
     display: contents;
     padding: 10px;
     transition: background-color 0.3s ease;
- }
+ } */
 
- .email-card:hover {
+ .email-card {
+    display: flex;
+    padding: 10px;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+
+ /* .email-card:hover {
     background-color: #f2f6fc;
- }
+ } */
+
+ /* .email-card:hover {
+    background-color: #f2f6fc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  } */
 
  .email-card-content {
      flex: 1;
@@ -65,30 +76,27 @@
      text-decoration: none;
  } */
 
- .email-actions {
+ /* .email-actions {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 10px; /* Adjust position as needed */
+    right: 10px; 
     background: transparent;
     border: none;
     cursor: pointer;
-    transition: opacity 0.3s ease;
-    display: none;
+    transition: opacity 0.3s ease; 
+     display: none;
   }
-  
-  .email-card:hover .email-actions {
+   */
+  /* .email-card:hover .email-actions {
     display: block;
-  }
+  } */
   
-  .email-actions button {
+  /* .email-actions button {
     background-color: transparent;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-left: 5px;
   }
-  
-  .email-actions button:hover {
-    background-color: #ddd; /* Example hover background color */
-  }
+   */

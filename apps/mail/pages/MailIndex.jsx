@@ -44,20 +44,20 @@ export function MailIndex() {
     setEmails(emailsNextState)
   }
 
-  function onRemoveMail(emailId) {
-    const email = emails.find((email) => email.id === emailId);
-    if (email.isRemoved) {
-      emailService.remove(emailId).then(() => {
-        setEmails((emails) => emails.filter((email) => email.id !== emailId));
-      });
-    } else {
-      setEmails((emails) =>
-        emails.map((email) =>
-          email.id === emailId ? { ...email, isRemoved: true } : email
-        )
-      );
-    }
-  }
+  // function onRemoveMail(emailId) {
+  //   const email = emails.find((email) => email.id === emailId);
+  //   if (email.isRemoved) {
+  //     emailService.remove(emailId).then(() => {
+  //       setEmails((emails) => emails.filter((email) => email.id !== emailId));
+  //     });
+  //   } else {
+  //     setEmails((emails) =>
+  //       emails.map((email) =>
+  //         email.id === emailId ? { ...email, isRemoved: true } : email
+  //       )
+  //     );
+  //   }
+  // }
 
 
   // function onChangeFilter(filterBy) {
@@ -112,15 +112,15 @@ export function MailIndex() {
   function renderCurrentView() {
     switch (currentView) {
       case 'inbox':
-        return <MailInbox emails={emails} onChangeEmail={onChangeEmail} onRemoveMail={onRemoveMail}  />
+        return <MailInbox emails={emails} onChangeEmail={onChangeEmail} onChangeEmails={onChangeEmails}/>
       case 'sent':
-        return <MailSent emails={emails} onChangeEmail={onChangeEmail} onRemoveMail={onRemoveMail} />
+        return <MailSent emails={emails} onChangeEmail={onChangeEmail} onChangeEmails={onChangeEmails} />
       case 'starred':
-        return <StarredMail emails={emails} onChangeEmail={onChangeEmail}  onRemoveMail={onRemoveMail}  />
+        return <StarredMail emails={emails} onChangeEmail={onChangeEmail}   onChangeEmails={onChangeEmails} />
       case 'trash':
-        return <TrashMail emails={emails}  onChangeEmail={onChangeEmail} onRemoveMail={onRemoveMail} />
+        return <TrashMail emails={emails}  onChangeEmail={onChangeEmail}  onChangeEmails={onChangeEmails}/>
       default:
-        return <MailInbox emails={emails} onChangeEmail={onChangeEmail} onRemoveMail={onRemoveMail}  />
+        return <MailInbox emails={emails} onChangeEmail={onChangeEmail}  onChangeEmails={onChangeEmails} />
     }
   }
   // function handleToggleStar(emailId) {

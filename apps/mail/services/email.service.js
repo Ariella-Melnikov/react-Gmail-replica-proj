@@ -17,6 +17,7 @@ export const emailService = {
   getDefaultFilter,
   getEmptyEmail,
   toggleStar,
+  toggleTrash,
 }
 
 function query(filterBy = {}) {
@@ -130,6 +131,18 @@ function toggleStar(emailId) {
     email.isStarred = !email.isStarred;
     return save(email);
   });
+}
+
+function toggleTrash(emailId) {
+  return getById(emailId).then(email => {
+    if (email.isRemoved) {
+      return remove(emailId)
+    } else {
+      email.isRemoved = true
+      
+    }
+    return save(email)
+  } )
 }
 
 function _createEmail(to, subject, body) {

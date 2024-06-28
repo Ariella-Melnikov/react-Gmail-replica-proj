@@ -1,10 +1,10 @@
 import { MailList } from './MailList.jsx'
 
-export function TrashMail({ emails, onRemoveMail }) {
+export function TrashMail({ emails, onChangeEmail }) {
   emails = emails.filter(e => e.isRemoved)
   return (
     <div>
-      <MailList emails={emails} onRemoveMail={onRemoveMail} showRemoveButton={true}  />
+      <MailList emails={emails} onChangeEmail={onChangeEmail} showRemoveButton={true}  />
     </div>
   )
 }
