@@ -36,14 +36,14 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
   const renderActionButton = () => {
     if (showRemoveButton) {
       return (
-        <button className='material-icons' onClick={() => onRemoveMail(email.id)}>
-          trash
+        <button className='material-symbols-outlined' onClick={() => onRemoveMail(email.id)}>
+          delete
         </button>
       );
     } else {
       return (
         <button className='email-starred-btn' onClick={handleStarToggle}>
-          <span>{email.isStarred ? <span className='material-icons custom-icon'>star</span> : <span className='material-icons'>star_border</span>}</span>
+          <span>{email.isStarred ? <span className='material-symbols-outlined custom-icon'>star</span> : <span className='material-symbols-outlined'>star_border</span>}</span>
         </button>
       );
     }

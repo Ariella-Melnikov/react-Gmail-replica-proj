@@ -116,7 +116,7 @@ export function MailIndex() {
       case 'sent':
         return <MailSent emails={emails} onChangeEmail={onChangeEmail} onRemoveMail={onRemoveMail} />
       case 'starred':
-        return <StarredMail emails={emails} onChangeEmail={onChangeEmail} onRemoveMail={onRemoveMail}  />
+        return <StarredMail emails={emails} onChangeEmail={onChangeEmail}  onRemoveMail={onRemoveMail}  />
       case 'trash':
         return <TrashMail emails={emails}  onChangeEmail={onChangeEmail} onRemoveMail={onRemoveMail} />
       default:
@@ -142,31 +142,31 @@ export function MailIndex() {
           <ul>
             <li>
               <button onClick={toggleCompose}>
-                <span className='material-icons'>edit</span>
+                <span className='material-symbols-outlined'>edit</span>
                 <span className='button-text'>Compose</span>
               </button>
             </li>
             <li>
               <button onClick={() => setCurrentView('inbox')}>
-                <span className='material-icons'>inbox</span>
+                <span className='material-symbols-outlined'>inbox</span>
                 <span className='button-text'>Inbox</span>
               </button>
             </li>
             <li>
               <button onClick={() => setCurrentView('starred')}>
-                <span className='material-icons'>star_border</span>
+                <span className='material-symbols-outlined'>star</span>
                 <span className='button-text'>Starred</span>
               </button>
             </li>
             <li>
               <button onClick={() => setCurrentView('sent')}>
-                <span className='material-icons'>send_border</span>
+                <span className='material-symbols-outlined'>send</span>
                 <span className='button-text'>Send</span>
               </button>
             </li>
             <li>
               <button onClick={() => setCurrentView('trash')}>
-                <span className='material-symbol'>delete</span>
+                <span className='material-symbols-outlined'>delete</span>
                 <span className='button-text'>Trash</span>
               </button>
             </li>

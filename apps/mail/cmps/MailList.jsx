@@ -16,7 +16,7 @@ export function MailList({ emails, onRemoveMail, onChangeEmail, showTrashButton 
         <div key={email.id} className='email-card'>
           <MailPreview email={email} onChangeEmail={onChangeEmail} showRemoveButton={showTrashButton} />
           <div className="email-actions">
-          <button className='material-icons' onClick={() => handleRemoveMail(email.id)}>trash</button>
+          <button className='material-symbols-outlined' onClick={() => handleRemoveMail(email.id)}>delete</button>
           {/* <button><Link to={`/mail/${email.id}`}>Details</Link></button>
           <button><Link to={`/mail/edit/${email.id}`}>Edit</Link></button> */}
           </div>
