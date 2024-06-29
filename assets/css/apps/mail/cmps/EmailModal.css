@@ -1,0 +1,40 @@
+
+   .email-modal {
+    position: fixed;
+    top: 75%;
+    left: 18%; 
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1000;
+  }
+  
+  .email-modal p {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 15px;
+  }
+  
+  .email-modal strong {
+    min-width: 120px; 
+    margin-right: 10px; 
+  }
+  
+  .email-modal span {
+    flex: 1; 
+  }
+  
+  .email-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #aaa;
+  }
+  
+  .email-modal-close:hover {
+    color: #000;
+  }

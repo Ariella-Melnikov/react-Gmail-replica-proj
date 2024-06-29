@@ -55,29 +55,38 @@ export function MailDetails({}) {
   }
 
   return (
-    <article className='email-details' style={{paddingTop: '100px'}}>
+    <article className='email-details' >
+           <span className='close'>
+                <Link to='/mail'>
+                    X
+                </Link>
+            </span>
       <nav className='email-details-nav'>
+ 
         <Link to={`/mail/${email.prevEmailId}`}>
-          <button>
-            <i className='fa-solid fa-arrow-left'></i>
-          </button>
+          <span>
+            <i className='material-symbols-outlined custom-icon1' title="Newer">arrow_back_ios</i>
+          </span>
         </Link>
         <Link to={`/mail/${email.nextEmailId}`}>
-          <button>
-            <i className='fa-solid fa-arrow-right'></i>
-          </button>
+          <span>
+            <i className='material-symbols-outlined custom-icon1' title="Older">arrow_forward_ios</i>
+          </span>
         </Link>
       </nav>
       <h2>{email.subject}</h2>
-      <span>{extractName(email.from)}</span> <h4>{email.from}</h4>
+      <div className="sender-info">
+        <h4>{extractName(email.from)}</h4>
+        <span>{email.from}</span>
+      </div>
       <p>
         to me: {extractName(email.to)}
-        <span className='material-symbols-outlined' onClick={handleOpenModal}>
+        <span className='material-symbols-outlined' title="Show Details" onClick={handleOpenModal}>
           arrow_drop_down
         </span>
         {isModalOpen && <EmailModal email={email} onClose={handleCloseModal} />}
       </p>
-      <p>{email.body}</p>
+      <p className="email-body">{email.body}</p>
     </article>
   )
 }

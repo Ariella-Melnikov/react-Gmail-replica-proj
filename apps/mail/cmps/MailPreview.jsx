@@ -48,6 +48,14 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
     })
   }
 
+  function extractName(email) {
+    if (!email) return
+    // Split the email address by '@'
+    const parts = email.split('@')
+    // Return the part before '@' as sender's name
+    return parts[0]
+  }
+
   // const renderActionButton = () => {
   //   if (showRemoveButton) {
   //     return (
@@ -73,7 +81,7 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
             <button className='email-btn' onClick={handleMarkedToggle}>
               <span>
                 {email.isMarked ? (
-                  <span className='material-icons custom-icon'>check_box</span>
+                  <span className='material-icons'>check_box</span>
                 ) : (
                   <span className='material-symbols-outlined'>check_box_outline_blank</span>
                 )}
@@ -92,16 +100,16 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
           </button>
           <button className='email-btn'>
             <Link key={email.id} to={`/mail/${email.id}`} >
-              <span className="fa fa-eye"></span>
+              <span className="material-symbols-outlined">info</span>
             </Link>
           </button>
-          <div className='email-card-from'>{email.from}</div>
+          <div className='email-card-from'>{extractName(email.from)}</div>
         </div>
         <div className='email-card-subject-body'>
           <div className='email-card-subject'>{email.subject} - </div>
           <div className='email-card-body'> {email.body} </div>
         </div>
-        <div className='email-actions email-btn'>
+        <div className='email-actions'>
           <div className='email-card-sentAt'> {formatDate(email.sentAt)} </div>
           <div className='delete-btn'>
             <span className='material-symbols-outlined' onClick={handleRemoveMail}>

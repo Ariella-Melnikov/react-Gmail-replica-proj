@@ -4,7 +4,7 @@ const { useState, useEffect } = React
 
 export function MailSent({emails, onChangeEmail, filterBy, onChangeFilter }) {
 
-  emails = emails.filter(e => e.from === 'user@appsus.com' && !e.isRemoved)
+  emails = emails.filter(e => e.from === 'user@appsus.com' && !e.isRemoved && !e.isDraft)
 
 
   return (

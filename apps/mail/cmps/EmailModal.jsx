@@ -13,13 +13,12 @@ export function EmailModal({ email, onClose }) {
 
   return (
     <div className="modal">
-      <div className="modal-content">
+      <div className="email-modal">
         <span className="close" onClick={onClose}>&times;</span>
-        <h2>Email Details</h2>
-        <p><strong>From:</strong> {email.from}</p>
-        <p><strong>To:</strong> {email.to}</p>
-        <p><strong>Sent At:</strong> {formatDate(email.sentAt)}</p>
-        <p><strong>Subject:</strong> {email.subject}</p>
+        <p><strong>From:</strong> <span>{email.from}</span></p>
+        <p><strong>To:</strong> <span>{email.to}</span></p>
+        <p><strong>Sent At:</strong> <span>{formatDate(email.sentAt)}</span></p>
+        <p><strong>Subject:</strong> <span>{email.subject}</span></p>
       </div>
     </div>
   );
