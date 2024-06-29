@@ -1,19 +1,22 @@
- /* note index */
+/* note index */
 
 
- .note-list-container{
-   columns: 3; 
+.note-add-container{
+   padding-top: 80px;
+}
 
+.note-list-container {
+   columns: 3;
+   padding-top: 80px;
+}
 
- }
- .note-index{
-    border: solid 2px red;
+.note-index {
+   border: solid 2px red;
+}
 
- }
-
- .single-note{
-    display: block;
-    border: solid 2px black;
-    border-radius: 5px;
-    break-inside: avoid;
- }
+.single-note {
+   display: block;
+   border: solid 2px black;
+   border-radius: 5px;
+   break-inside: avoid;
+}
