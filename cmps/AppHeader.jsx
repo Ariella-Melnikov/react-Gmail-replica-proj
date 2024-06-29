@@ -1,5 +1,5 @@
 const { Link, NavLink } = ReactRouterDOM
-import logo from '../assets/img/LOGOS/'
+import logo from "../assets/img/LOGOS/berlink-Gray.png"
 export function AppHeader() {
     
 
