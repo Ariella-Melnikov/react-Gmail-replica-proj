@@ -1,8 +1,8 @@
 .email-card {
     display: flex;
     /* display: grid; */
-    width: calc(100vw - 3.472vw);
-    height: calc (100vh - - 3.472vh);
+    width: calc(100vw - 3.472vw); 
+     height: calc (100vh - - 3.472vh); 
      z-index: 0;
 
 
@@ -12,12 +12,16 @@
     border-width: 2px;
 }
 
+.email-card-read {
+    background-color: lightblue !important;
+}
+
 .email-card-select-email {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
 
     width: calc(100vw - 3.472vw);
-    height: calc (100vh - - 3.472vh);
+    height: calc (100vh - - 3.472vh); 
 
 
     align-items: center;

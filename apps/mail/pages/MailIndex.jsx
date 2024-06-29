@@ -20,6 +20,10 @@ export function MailIndex() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    loadEmails()
+  }, [])
+
+  useEffect(() => {
     console.log('loadEmails', emails)
     loadEmails()
   }, [currentView])
@@ -28,9 +32,9 @@ export function MailIndex() {
     console.log('emails', emails)
   }, [emails])
 
-  useEffect(() => {
-    console.log('filterBy', filterBy)
-  }, [filterBy])
+  // useEffect(() => {
+  //   console.log('filterBy', filterBy)
+  // }, [filterBy])
 
   // function handleExitUserMessage(msg) {
   //   showErrorMsgMail( msg, true);
@@ -46,19 +50,21 @@ export function MailIndex() {
     setEmails(emailsNextState)
   }
 
-  // function onChangeFilter(filterBy) {
-  //   setFilterBy(filterBy)
-  // }
+  function onChangeFilter(filterBy) {
+    console.log("changed filter" , filterBy)
+    setFilterBy(filterBy)
+    loadEmails(filterBy)
+  }
 
   function onChangeEmails(emails) {
     setEmails(emails)
   }
 
-  function loadEmails() {
+  function loadEmails(filters = filterBy) {
     switch (currentView) {
       case 'inbox':
         emailService
-          .query(filterBy)
+          .query(filters)
           .then((emails) => onChangeEmails(emails))
           .catch((err) => {
             console.error('err:', err)
@@ -66,7 +72,7 @@ export function MailIndex() {
         break
       case 'sent':
         emailService
-          .query(filterBy)
+          .query(filters)
           .then((emails) => setEmails(emails))
           .catch((err) => {
             console.log('err:', err)
@@ -74,7 +80,7 @@ export function MailIndex() {
         break
       case 'starred':
         emailService
-          .query(filterBy)
+          .query(filters)
           .then((emails) => onChangeEmails(emails))
           .catch((err) => {
             console.error('err:', err)
@@ -82,7 +88,7 @@ export function MailIndex() {
         break
       case 'trash':
         emailService
-          .query(filterBy)
+          .query(filters)
           .then((emails) => onChangeEmails(emails))
           .catch((err) => {
             console.error('err:', err)
@@ -98,15 +104,15 @@ export function MailIndex() {
   function renderCurrentView() {
     switch (currentView) {
       case 'inbox':
-        return <MailInbox emails={emails} onChangeEmail={onChangeEmail} onChangeEmails={onChangeEmails}/>
+        return <MailInbox emails={emails} onChangeEmail={onChangeEmail} onChangeEmails={onChangeEmails} filterBy={filterBy} onChangeFilter={onChangeFilter} />
       case 'sent':
-        return <MailSent emails={emails} onChangeEmail={onChangeEmail} onChangeEmails={onChangeEmails} />
+        return <MailSent emails={emails} onChangeEmail={onChangeEmail} onChangeEmails={onChangeEmails}  filterBy={filterBy} onChangeFilter={onChangeFilter} />
       case 'starred':
-        return <StarredMail emails={emails} onChangeEmail={onChangeEmail}   onChangeEmails={onChangeEmails} />
+        return <StarredMail emails={emails} onChangeEmail={onChangeEmail}   onChangeEmails={onChangeEmails}  filterBy={filterBy} onChangeFilter={onChangeFilter} />
       case 'trash':
-        return <TrashMail emails={emails}  onChangeEmail={onChangeEmail}  onChangeEmails={onChangeEmails}/>
+        return <TrashMail emails={emails}  onChangeEmail={onChangeEmail}  onChangeEmails={onChangeEmails}  filterBy={filterBy} onChangeFilter={onChangeFilter} />
       default:
-        return <MailInbox emails={emails} onChangeEmail={onChangeEmail}  onChangeEmails={onChangeEmails} />
+        return <MailInbox emails={emails} onChangeEmail={onChangeEmail}  onChangeEmails={onChangeEmails}  filterBy={filterBy} onChangeFilter={onChangeFilter} />
     }
   }
   // function handleToggleStar(emailId) {

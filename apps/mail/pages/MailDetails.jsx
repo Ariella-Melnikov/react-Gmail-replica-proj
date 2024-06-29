@@ -7,7 +7,7 @@ import { EmailModal } from '../cmps/EmailModal.jsx'
 import { showErrorMsg } from '../../../services/event-bus.service.js'
 import { showSuccessMsg } from '../../../services/event-bus.service.js'
 
-export function MailDetails() {
+export function MailDetails({}) {
   const [email, setEmail] = useState({})
   const [isLoading, setIsLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -17,13 +17,16 @@ export function MailDetails() {
 
   useEffect(() => {
     loadEmail()
-  }, [])
+  }, [email])
+
 
   function loadEmail() {
     setIsLoading(true)
     emailService
       .getById(params.emailId)
       .then((res) => {
+        res.isRead = true
+        emailService.save(email)
         setEmail(res)
       })
       .catch(() => {
@@ -52,7 +55,7 @@ export function MailDetails() {
   }
 
   return (
-    <article className='email-details'>
+    <article className='email-details' style={{paddingTop: '100px'}}>
       <nav className='email-details-nav'>
         <Link to={`/mail/${email.prevEmailId}`}>
           <button>

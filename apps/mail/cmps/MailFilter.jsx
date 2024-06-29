@@ -1,38 +1,42 @@
 const { useState, useEffect } = React
-
-export function MailFilter({ filterBy, onSetFilter }) {
+import { TIME_RANGES } from '../services/email.service.js'
+const FILTERS = Object.freeze({
+  TEXT: 'text',
+  ISREAD: 'is_read',
+  SENT_AT: 'sent_at',
+})
+export function MailFilter({ filterBy, onChangeFilter }) {
   const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
 
   useEffect(() => {
-    onSetFilter(filterByToEdit)
+    onChangeFilter(filterByToEdit)
   }, [filterByToEdit])
 
-  function handleChange({ target }) {
-    const field = target.name
-    let value = target.value
+  useEffect(() => {
+    setFilterByToEdit(filterByToEdit)
+  }, [filterBy])
 
-    // switch (target.type) {
-    //   case 'number':
-    //   case 'range':
-    //     value = +value
-    //     break
-    switch (target.type) {
-        case 'checkbox':
-          value = target.checked;
-          break;
-
+  function handleChange(type, target) {
+    switch (type) {
+      case FILTERS.TEXT:
+        filterByToEdit.txt = target
+        setFilterByToEdit(filterByToEdit)
+        onChangeFilter(filterByToEdit)
+        break
+      case FILTERS.ISREAD:
+        filterByToEdit.isRead = target
+        setFilterByToEdit(filterByToEdit)
+        onChangeFilter(filterByToEdit)
+        break
+      case FILTERS.SENT_AT:
+        filterByToEdit.sent_at = target
+        setFilterByToEdit(filterByToEdit)
+        onChangeFilter(filterByToEdit)
+        break
       default:
         break
     }
-    setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
   }
-
-  function onSubmitFilter(ev) {
-    ev.preventDefault()
-    onSetFilter(filterByToEdit)
-  }
-
-
 
   return (
     <div className='mail-filter'>
@@ -40,30 +44,22 @@ export function MailFilter({ filterBy, onSetFilter }) {
         type='text'
         placeholder='Search...'
         value={filterBy.txt || ''}
-        onChange={(e) => handleChange('txt', e.target.value)}
+        onChange={(e) => handleChange(FILTERS.TEXT, e.target.value)}
       />
       <label>
         <input
           type='checkbox'
           checked={filterBy.isRead || false}
-          onChange={(e) => handleChange('isRead', e.target.checked)}
+          onChange={(e) => handleChange(FILTERS.ISREAD, e.target.checked)}
         />
         Read
       </label>
-      <label>
-        <input
-          type='checkbox'
-          checked={filterBy.isStared || false}
-          onChange={(e) => handleChange('isStared', e.target.checked)}
-        />
-        Starred
-      </label>
-      <select value={filterBy.status || ''} onChange={(e) => handleChange('status', e.target.value)}>
-        <option value=''>All</option>
-        <option value='inbox'>Inbox</option>
-        <option value='sent'>Sent</option>
-        <option value='trash'>Trash</option>
-        <option value='draft'>Draft</option>
+      <select value={filterBy.status || ''} onChange={(e) => handleChange(FILTERS.SENT_AT, e.target.value)}>
+        <option value={TIME_RANGES.ANY_TIME}>Any Time</option>
+        <option value={TIME_RANGES.WEEK_AGO}>1 Weak Ago</option>
+        <option value={TIME_RANGES.MONTH_AGO}>1 Month Ago</option>
+        <option value={TIME_RANGES.SIX_MONTHS_AGO}>6 Month Ago</option>
+        <option value={TIME_RANGES.YEAR_AGO}>1 Year Ago</option>
       </select>
     </div>
   )

@@ -63,8 +63,8 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
   // };
 
   return (
-    <article className='email-card'>
-      <div className='email-card-select-email'>
+    <article className={`email-card ${email.isRead && 'email-card-read'}`}>
+      <div className={`email-card-select-email ${email.isRead && 'email-card-read'}`}>
         <div className='drag-indicator'>
           <span className='material-symbols-outlined'>drag_indicator</span>
         </div>
