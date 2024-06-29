@@ -1,5 +1,6 @@
 const { Link } = ReactRouterDOM
 
+
 import { MailPreview } from './MailPreview.jsx'
 
 export function MailList({ emails, onChangeEmail, showTrashButton }) {
@@ -11,12 +12,15 @@ export function MailList({ emails, onChangeEmail, showTrashButton }) {
     // <section className='emails-lst-container'>
     <section >
       {emails.map(email => (
-        <div key={email.id} >
+        // <Link key={email.id} to={`/mail/${email.id}`}>
+        <div key={email.id}>
           <MailPreview email={email} onChangeEmail={onChangeEmail}  showRemoveButton={showTrashButton} />
           
           {/* <button><Link to={`/mail/${email.id}`}>Details</Link></button>
           <button><Link to={`/mail/edit/${email.id}`}>Edit</Link></button> */}
 
+        
+        {/* </Link> */}
         </div>
       ))}
     </section>

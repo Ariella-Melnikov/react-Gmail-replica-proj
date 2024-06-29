@@ -1,8 +1,9 @@
 const { useState, useEffect } = React
+const { Link } = ReactRouterDOM
 
 import { emailService } from '../services/email.service.js'
 export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
-  const [isMarked, setIsMarked] = useState(email.isMarked);
+  const [isMarked, setIsMarked] = useState(email.isMarked)
 
   useEffect(() => {
     console.log('I enter the useEffect on preview mail')
@@ -27,7 +28,6 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
       return date.toLocaleDateString([], { year: 'numeric', month: 'numeric', day: 'numeric' })
     }
   }
-
 
   const handleStarToggle = () => {
     emailService.toggleStar(email.id)
@@ -69,15 +69,15 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
           <span className='material-symbols-outlined'>drag_indicator</span>
         </div>
         <div className='email-card-btn-from'>
-        <div className='mark-as-read-btn'>
-        <button className='email-btn' onClick={handleMarkedToggle}>
+          <div className='mark-as-read-btn'>
+            <button className='email-btn' onClick={handleMarkedToggle}>
               <span>
-              {email.isMarked ? (
-                <span className='material-icons custom-icon'>check_box</span>
-              ) : (
-                <span className='material-symbols-outlined'>check_box_outline_blank</span>
-              )}
-            </span>
+                {email.isMarked ? (
+                  <span className='material-icons custom-icon'>check_box</span>
+                ) : (
+                  <span className='material-symbols-outlined'>check_box_outline_blank</span>
+                )}
+              </span>
             </button>
           </div>
           {/* {renderActionButton()} */}
@@ -89,6 +89,11 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
                 <span className='material-symbols-outlined'>star_border</span>
               )}
             </span>
+          </button>
+          <button className='email-btn'>
+            <Link key={email.id} to={`/mail/${email.id}`} >
+              <span className="fa fa-eye"></span>
+            </Link>
           </button>
           <div className='email-card-from'>{email.from}</div>
         </div>
