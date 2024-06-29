@@ -4,7 +4,7 @@ import { emailService } from '../services/email.service.js'
 import { showErrorMsg } from '../../../services/event-bus.service.js'
 import { showSuccessMsg } from '../../../services/event-bus.service.js'
 
-export function MailCompose({ onClose }) {
+export function MailCompose({ onClose, onChangeEmail }) {
   const [email, setEmail] = useState(emailService.getEmptyEmail())
 
 
@@ -18,6 +18,7 @@ export function MailCompose({ onClose }) {
     if(email.body || email.subject) {
         email.isDraft = true
         emailService.save(email).then(() => {
+          onChangeEmail(email)
           onClose()
         })
     }

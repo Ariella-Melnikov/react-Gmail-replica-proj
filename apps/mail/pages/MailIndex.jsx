@@ -52,6 +52,11 @@ export function MailIndex() {
     setEmails(emailsNextState)
   }
 
+  function onSaveNewEmail(newEmail ={}) {
+    let emailsNextState = [...emails, newEmail]
+    setEmails(emailsNextState)
+  }
+
   function onChangeFilter(filterBy) {
     console.log('changed filter', filterBy)
     setFilterBy(filterBy)
@@ -232,7 +237,7 @@ export function MailIndex() {
 
         <div className='emails-lst-container'>{renderCurrentView()}</div>
         {/* <MailFilter  filterBy={filterBy} onSetFilter={onSetFilter} /> */}
-        {isComposeOpen && <MailCompose onClose={toggleCompose} />}
+        {isComposeOpen && <MailCompose onClose={toggleCompose} onChangeEmail={onSaveNewEmail} />}
       </main>
     </section>
   )
