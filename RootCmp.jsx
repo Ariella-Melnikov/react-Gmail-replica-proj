@@ -12,6 +12,7 @@ import { MailInbox } from './apps/mail/cmps/MailInbox.jsx'
 import { MailSent } from './apps/mail/cmps/MailSent.jsx'
 import { StarredMail } from './apps/mail/cmps/StarredMail.jsx'
 import { TrashMail } from './apps/mail/cmps/TrashMail.jsx'
+import { DraftMail } from './apps/mail/cmps/DraftMail.jsx'
 
 export function App() {
   return (
@@ -26,6 +27,8 @@ export function App() {
             <Route path='/mail/sent' element={<MailSent />} />
             <Route path='/mail/starred' element={<StarredMail />} />
             <Route path='/mail/trash' element={<TrashMail />} />
+            <Route path='/mail/draft' element={<DraftMail />} />
+
           </Route>
           <Route path='/mail/:emailId' element={<MailDetails />} />
           <Route path='/mail/compose' element={<MailCompose />} />

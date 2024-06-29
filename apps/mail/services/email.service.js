@@ -12,6 +12,7 @@ export const TIME_RANGES = Object.freeze({
   MONTH_AGO: '1_month_ago',
   SIX_MONTHS_AGO: '6_month_ago',
   YEAR_AGO: '1_year_ago',
+  OVER_A_YEAR: 'over_1_year',
 })
 
 export const emailService = {
@@ -48,19 +49,23 @@ function query(filterBy = getDefaultFilter()) {
     }
 
     if (filterBy.sent_at) {
-      // let now = new Date();
-      // switch (filterBy.sent_at) {
-      //   case TIME_RANGES.WEEK_AGO:
-      //     let sevenDaysAgo = new Date(now.setDate(now.getDate() - 7));
-      //     emails = emails.filter((email) => email.sentAt && email.sentAt > sevenDaysAgo)
-      //     break
-      //   case TIME_RANGES.YEAR_AGO:
-      //     let year_ago = new Date(now.setFullYear(now.getFullYear() - 1));
-      //     emails = emails.filter((email) => email.sentAt && email.sentAt > year_ago)
-      //     break
-      //   default:
-      //     break
-      // }
+      let now = new Date();
+      switch (filterBy.sent_at) {
+        case TIME_RANGES.WEEK_AGO:
+          let sevenDaysAgo = new Date(now.setDate(now.getDate() - 7));
+          emails = emails.filter((email) => email.sentAt && email.sentAt > sevenDaysAgo)
+          break
+        case TIME_RANGES.YEAR_AGO:
+          let year_ago = new Date(now.setFullYear(now.getFullYear() - 1));
+          emails = emails.filter((email) => email.sentAt && email.sentAt > year_ago)
+          break
+        case TIME_RANGES.OVER_A_YEAR:
+          let over_1_year = new Date(now.setFullYear(now.getFullYear() - 1));
+          emails = emails.filter((email) => email.sentAt && email.sentAt < over_1_year)
+          break
+        default:
+          break
+      }
     }
 
     return emails
@@ -142,7 +147,7 @@ function save(email) {
   if (email.id) {
     return asyncStorageService.put(EMAIL_KEY, email)
   } else {
-    const newEmail = _createEmail(email.to, email.subject, email.body)
+    const newEmail = _createEmail(email.to, email.subject, email.body, email.isDraft)
     newEmail.isSent = true // Mark the email as sent
     return asyncStorageService.post(EMAIL_KEY, newEmail)
   }
@@ -187,7 +192,7 @@ function toggleTrash(emailId) {
   })
 }
 
-function _createEmail(to, subject, body) {
+function _createEmail(to, subject, body, isDraft = false) {
   const currentTimestamp = Date.now()
   return {
     id: utilService.makeId(),
@@ -196,6 +201,7 @@ function _createEmail(to, subject, body) {
     body,
     isStarred: false,
     isRead: false,
+    isDraft: isDraft,
     sentAt: currentTimestamp,
     removedAt: null,
     from: 'user@appsus.com',

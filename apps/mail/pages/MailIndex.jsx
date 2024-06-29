@@ -6,18 +6,20 @@ import { MailInbox } from '../cmps/MailInbox.jsx'
 import { MailSent } from '../cmps/MailSent.jsx'
 import { StarredMail } from '../cmps/StarredMail.jsx'
 import { TrashMail } from '../cmps/TrashMail.jsx'
+import { DraftMail } from '../cmps/DraftMail.jsx'
+
 import { showSuccessMsg } from '../../../services/event-bus.service.js'
 import { showErrorMsg } from '../../../services/event-bus.service.js'
 
 const { useState, useEffect } = React
-const {useNavigate} = ReactRouterDOM
+const { useNavigate } = ReactRouterDOM
 
 export function MailIndex() {
   const [currentView, setCurrentView] = useState('inbox')
   const [isComposeOpen, setIsComposeOpen] = useState(false)
   const [emails, setEmails] = useState([])
   const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter())
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
     loadEmails()
@@ -44,14 +46,14 @@ export function MailIndex() {
   //   showSuccessMsg(msg, true);
   // }
 
-  function onChangeEmail(email) {
+  function onChangeEmail(email ={}) {
     let emailsNextState = emails.map((e) => (e.id == email.id ? email : e))
     console.log(emailsNextState)
     setEmails(emailsNextState)
   }
 
   function onChangeFilter(filterBy) {
-    console.log("changed filter" , filterBy)
+    console.log('changed filter', filterBy)
     setFilterBy(filterBy)
     loadEmails(filterBy)
   }
@@ -86,6 +88,7 @@ export function MailIndex() {
             console.error('err:', err)
           })
         break
+      case 'draft':
       case 'trash':
         emailService
           .query(filters)
@@ -104,15 +107,66 @@ export function MailIndex() {
   function renderCurrentView() {
     switch (currentView) {
       case 'inbox':
-        return <MailInbox emails={emails} onChangeEmail={onChangeEmail} onChangeEmails={onChangeEmails} filterBy={filterBy} onChangeFilter={onChangeFilter} />
+        return (
+          <MailInbox
+            emails={emails}
+            onChangeEmail={onChangeEmail}
+            onChangeEmails={onChangeEmails}
+            filterBy={filterBy}
+            onChangeFilter={onChangeFilter}
+          />
+        )
       case 'sent':
-        return <MailSent emails={emails} onChangeEmail={onChangeEmail} onChangeEmails={onChangeEmails}  filterBy={filterBy} onChangeFilter={onChangeFilter} />
+        return (
+          <MailSent
+            emails={emails}
+            onChangeEmail={onChangeEmail}
+            onChangeEmails={onChangeEmails}
+            filterBy={filterBy}
+            onChangeFilter={onChangeFilter}
+          />
+        )
       case 'starred':
-        return <StarredMail emails={emails} onChangeEmail={onChangeEmail}   onChangeEmails={onChangeEmails}  filterBy={filterBy} onChangeFilter={onChangeFilter} />
+        return (
+          <StarredMail
+            emails={emails}
+            onChangeEmail={onChangeEmail}
+            onChangeEmails={onChangeEmails}
+            filterBy={filterBy}
+            onChangeFilter={onChangeFilter}
+          />
+        )
       case 'trash':
-        return <TrashMail emails={emails}  onChangeEmail={onChangeEmail}  onChangeEmails={onChangeEmails}  filterBy={filterBy} onChangeFilter={onChangeFilter} />
+        return (
+          <TrashMail
+            emails={emails}
+            onChangeEmail={onChangeEmail}
+            onChangeEmails={onChangeEmails}
+            filterBy={filterBy}
+            onChangeFilter={onChangeFilter}
+          />
+        )
+      case 'draft':
+        return (
+          <DraftMail
+            emails={emails}
+            onChangeEmail={onChangeEmail}
+            onChangeEmails={onChangeEmails}
+            filterBy={filterBy}
+            onChangeFilter={onChangeFilter}
+          />
+        )
+
       default:
-        return <MailInbox emails={emails} onChangeEmail={onChangeEmail}  onChangeEmails={onChangeEmails}  filterBy={filterBy} onChangeFilter={onChangeFilter} />
+        return (
+          <MailInbox
+            emails={emails}
+            onChangeEmail={onChangeEmail}
+            onChangeEmails={onChangeEmails}
+            filterBy={filterBy}
+            onChangeFilter={onChangeFilter}
+          />
+        )
     }
   }
   // function handleToggleStar(emailId) {
@@ -165,6 +219,12 @@ export function MailIndex() {
               <button onClick={() => handleButtonClick('trash')}>
                 <span className='material-symbols-outlined'>delete</span>
                 <span className='button-text'>Trash</span>
+              </button>
+            </li>
+            <li>
+              <button onClick={() => handleButtonClick('draft')}>
+                <span className='material-symbols-outlined'>draft</span>
+                <span className='button-text'>Draft</span>
               </button>
             </li>
           </ul>

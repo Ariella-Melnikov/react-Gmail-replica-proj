@@ -1,4 +1,4 @@
-const { useState } = React
+const { useState, useEffect } = React
 
 import { emailService } from '../services/email.service.js'
 import { showErrorMsg } from '../../../services/event-bus.service.js'
@@ -7,9 +7,20 @@ import { showSuccessMsg } from '../../../services/event-bus.service.js'
 export function MailCompose({ onClose }) {
   const [email, setEmail] = useState(emailService.getEmptyEmail())
 
+
   function handleChange({ target }) {
     const { name, value } = target
     setEmail((prevEmail) => ({ ...prevEmail, [name]: value }))
+  }
+
+  
+  function onCloseComponent() {
+    if(email.body || email.subject) {
+        email.isDraft = true
+        emailService.save(email).then(() => {
+          onClose()
+        })
+    }
   }
 
   function onSendEmail(ev) {
@@ -41,7 +52,7 @@ export function MailCompose({ onClose }) {
       <textarea onChange={handleChange} value={body} id='body' name='body' rows='10' />
 
       <button type='submit' className='send-btn'>Send</button>
-      <button type='button' onClick={onClose} className='cancel-btn'>Cancel</button>
+      <button type='button' onClick={onCloseComponent} className='cancel-btn'>Cancel</button>
     </form>
   </section>
   )

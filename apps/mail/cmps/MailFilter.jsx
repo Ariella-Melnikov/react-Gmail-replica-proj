@@ -54,12 +54,13 @@ export function MailFilter({ filterBy, onChangeFilter }) {
         />
         Read
       </label>
-      <select value={filterBy.status || ''} onChange={(e) => handleChange(FILTERS.SENT_AT, e.target.value)}>
+      <select value={filterBy.sent_at || ''} onChange={(e) => handleChange(FILTERS.SENT_AT, e.target.value)}>
         <option value={TIME_RANGES.ANY_TIME}>Any Time</option>
         <option value={TIME_RANGES.WEEK_AGO}>1 Weak Ago</option>
         <option value={TIME_RANGES.MONTH_AGO}>1 Month Ago</option>
         <option value={TIME_RANGES.SIX_MONTHS_AGO}>6 Month Ago</option>
         <option value={TIME_RANGES.YEAR_AGO}>1 Year Ago</option>
+        <option value={TIME_RANGES.OVER_A_YEAR}>Over 1 Year</option>
       </select>
     </div>
   )
