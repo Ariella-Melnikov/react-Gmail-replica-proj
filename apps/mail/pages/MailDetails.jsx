@@ -55,22 +55,22 @@ export function MailDetails({}) {
   }
 
   return (
-    <article className='email-details' >
-           <span className='close'>
+    <article className='email-details' title="Back">
+           <span className='material-symbols-outlined'>
                 <Link to='/mail'>
-                    X
+                arrow_back
                 </Link>
             </span>
       <nav className='email-details-nav'>
  
         <Link to={`/mail/${email.prevEmailId}`}>
           <span>
-            <i className='material-symbols-outlined custom-icon1' title="Newer">arrow_back_ios</i>
+            <i className='material-symbols-outlined' title="Newer">arrow_back_ios</i>
           </span>
         </Link>
         <Link to={`/mail/${email.nextEmailId}`}>
           <span>
-            <i className='material-symbols-outlined custom-icon1' title="Older">arrow_forward_ios</i>
+            <i className='material-symbols-outlined' title="Older">arrow_forward_ios</i>
           </span>
         </Link>
       </nav>
