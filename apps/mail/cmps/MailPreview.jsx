@@ -53,12 +53,14 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
   // };
 
   return (
-    <article>
+    <article className='email-card'>
       <div className='email-card-select-email'>
-        {/* <div className='email-card'> */}
+        <div className='drag-indicator'>
+          <span className='material-symbols-outlined'>drag_indicator</span>
+        </div>
         <div className='email-card-btn-from'>
           {/* {renderActionButton()} */}
-          <button className='email-starred-btn' onClick={handleStarToggle}>
+          <button className='email-btn' onClick={handleStarToggle}>
             <span>
               {email.isStarred ? (
                 <span className='material-icons custom-icon'>star</span>
@@ -73,14 +75,14 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
           <div className='email-card-subject'>{email.subject} - </div>
           <div className='email-card-body'> {email.body} </div>
         </div>
-        <div className='email-card-sentAt'> {formatDate(email.sentAt)} </div>
-        <div className='email-actions'>
-          <button className='material-symbols-outlined' onClick={handleRemoveMail}>
-            delete
-          </button>
+        <div className='email-actions email-btn'>
+          <div className='email-card-sentAt'> {formatDate(email.sentAt)} </div>
+          <div className='delete-btn'>
+            <span className='material-symbols-outlined' onClick={handleRemoveMail}>
+              delete
+            </span>
+          </div>
         </div>
-
-        {/* </div> */}
       </div>
     </article>
   )

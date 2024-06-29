@@ -11,7 +11,7 @@ export function MailList({ emails, onChangeEmail, showTrashButton }) {
     // <section className='emails-lst-container'>
     <section >
       {emails.map(email => (
-        <div key={email.id} className='email-card'>
+        <div key={email.id} >
           <MailPreview email={email} onChangeEmail={onChangeEmail}  showRemoveButton={showTrashButton} />
           
           {/* <button><Link to={`/mail/${email.id}`}>Details</Link></button>
