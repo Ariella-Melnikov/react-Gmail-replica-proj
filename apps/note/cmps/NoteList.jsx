@@ -45,7 +45,7 @@ export function NoteList({ notes, onSelectNoteId, onRemoveNote }) {
           <li key={note.id} className="note-item" style={note.style}>
             <NotePreview note={note} />
             <div className="icones-display">
-              <div className="pin-icon"></div>
+
               <section className="note-actions">
                 <div className="other-icons">
                   <span
