@@ -1,4 +1,3 @@
-// mail service
 import { emails as staticEmails } from './emails.js'
 import { newEmails as staticNewEmails } from './emails.js'
 import { storageService } from '../../../services/storage.service.js'
@@ -27,6 +26,7 @@ export const emailService = {
   toggleStar,
   toggleTrash,
   toggleMarked,
+  toggleRead,
 }
 
 function query(filterBy = getDefaultFilter()) {
@@ -72,66 +72,6 @@ function query(filterBy = getDefaultFilter()) {
   })
 }
 
-// function querySentEmail(filterBy = {}) {
-//   return asyncStorageService.query(NEWEMAIL_KEY).then((emails) => {
-//     // If no emails found in storage, use staticEmails and save to storage
-//     if (!emails || emails.length === 0) {
-//       emails =  staticNewEmails.map((email) => ({
-//         ...email }))
-//         storageService.saveToStorage(NEWEMAIL_KEY, emails)
-//     }
-//     return emails
-//   })
-// }
-
-// // Apply filters
-// if (filterBy.status) {
-//   switch (filterBy.status) {
-//     case 'inbox':
-//       emails = emails.filter((email) => !email.removedAt && email.to === loggedinUser.email);
-//       break;
-//     case 'sent':
-//       emails = emails.filter((email) => email.from === loggedinUser.email);
-//       break;
-//     case 'trash':
-//       emails = emails.filter((email) => email.removedAt !== null);
-//       break;
-//     case 'draft':
-//       emails = emails.filter((email) => email.removedAt === null && !email.sentAt);
-//       break;
-//     default:
-//       break;
-//   }
-// }
-
-// if (filterBy.txt) {
-//   const regex = new RegExp(filterBy.txt, 'i');
-//   emails = emails.filter((email) => regex.test(email.subject) || regex.test(email.body));
-// }
-
-// if (filterBy.isRead !== undefined) {
-//   emails = emails.filter((email) => email.isRead === filterBy.isRead);
-// }
-
-// if (filterBy.isStared !== undefined) {
-//   emails = emails.filter((email) => email.isStarred === filterBy.isStared);
-// }
-
-// if (filterBy.labels && filterBy.labels.length > 0) {
-//   emails = emails.filter((email) => {
-//     for (let label of filterBy.labels) {
-//       if (email.labels && email.labels.includes(label)) {
-//         return true;
-//       }
-//     }
-//     return false;
-//   });
-// }
-
-//     return emails;
-//   });
-// }
-
 function getById(emailId) {
   return asyncStorageService.get(EMAIL_KEY, emailId).then((email) => _setNextPrevEmailId(email))
 }
@@ -170,6 +110,13 @@ function getDefaultFilter() {
 function toggleStar(emailId) {
   return getById(emailId).then((email) => {
     email.isStarred = !email.isStarred
+    return save(email)
+  })
+}
+
+function toggleRead(emailId) {
+  return getById(emailId).then((email) => {
+    email.isRead = !email.isRead
     return save(email)
   })
 }

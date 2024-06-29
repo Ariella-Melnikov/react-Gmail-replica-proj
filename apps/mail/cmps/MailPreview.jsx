@@ -35,6 +35,12 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
     onChangeEmail(email)
   }
 
+  const handleReadToggle = () => {
+    emailService.toggleRead(email.id)
+    email.isRead = !email.isRead
+    onChangeEmail(email)
+  }
+
   const handleMarkedToggle = () => {
     emailService.toggleMarked(email.id)
     email.isMarked = !email.isMarked
@@ -77,7 +83,7 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
           <span className='material-symbols-outlined'>drag_indicator</span>
         </div>
         <div className='email-card-btn-from'>
-          <div className='mark-as-read-btn'>
+          {/* <div className='mark-as-read-btn'>
             <button className='email-btn' onClick={handleMarkedToggle}>
               <span>
                 {email.isMarked ? (
@@ -87,9 +93,9 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
                 )}
               </span>
             </button>
-          </div>
+          </div> */}
           {/* {renderActionButton()} */}
-          <button className='email-btn' onClick={handleStarToggle}>
+          <button className='starred-btn' title="Starred" onClick={handleStarToggle}>
             <span>
               {email.isStarred ? (
                 <span className='material-icons custom-icon'>star</span>
@@ -98,7 +104,7 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
               )}
             </span>
           </button>
-          <button className='email-btn'>
+          <button className='email-btn' title="Detils">
             <Link key={email.id} to={`/mail/${email.id}`} >
               <span className="material-symbols-outlined">info</span>
             </Link>
@@ -112,8 +118,17 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
         <div className='email-actions'>
           <div className='email-card-sentAt'> {formatDate(email.sentAt)} </div>
           <div className='delete-btn'>
-            <span className='material-symbols-outlined' onClick={handleRemoveMail}>
+            <span className='material-symbols-outlined' title="Delete" onClick={handleRemoveMail}>
               delete
+            </span>
+            </div>
+            <div className='read-btn' onClick={handleReadToggle}>
+            <span>
+              {email.isRead ? (
+                <span className='material-symbols-outlined' title="Mark as unread">mark_email_unread</span>
+              ) : (
+                <span className='material-symbols-outlined' title="Mark as read">drafts</span>
+              )}
             </span>
           </div>
         </div>

@@ -10,6 +10,7 @@
     transition: box-shadow 0.3s ease, background-color 0.3s ease;
     border: #202124;
     border-width: 2px;
+    align-items: center;
 }
 
 .email-card-read {
@@ -70,13 +71,34 @@
 
 }
 
-.delete-btn {
-    display: none;
+.starred-btn {
     border: none;
     background-color: transparent;
     padding: 0;
     cursor: pointer;
+    /* margin-inline: start; */
+    margin-right: 10px;
+    transition: background-color 0.3s ease, border 0.3s ease;
+
 }
+
+.delete-btn {
+    display: none;
+    background-color: transparent;
+    padding: 4px; /* Set initial padding */
+    cursor: pointer;
+    border-radius: 50%; /* Ensure it has a consistent shape */
+    transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+.read-btn {
+    display: none;
+    background-color: transparent;
+    padding: 4px; /* Set initial padding */
+    cursor: pointer;
+    border-radius: 50%; /* Ensure it has a consistent shape */
+    /* transition: background-color 0.3s ease, border 0.3s ease; */
+  }
 
 
 .material-symbols-outlined {
@@ -100,8 +122,6 @@
     left: 10px;
 }
 
-
-
 .custom-icon {
     color: #f2cb4c;
 }
@@ -123,26 +143,33 @@
     display: inline;
 }
 
-/* .email-card:hover .drag-indicator {
+.email-card:hover .read-btn {
     display: inline;
-    display: block;
-
 }
 
-.email-card:hover .delete-btn {
-    display: inline;
-    display: block;
+.delete-btn:hover {
+    background-color: #e7eaf0;
+    border: 2px solid transparent;
+}
+.read-btn:hover {
+    background-color: #e7eaf0;
+    border: 2px solid transparent;
+}
 
-} */
+.starred-btn:hover {
+    background-color: #e7eaf0;
+    border: 2px solid transparent;
+    padding: 4px; 
+    cursor: pointer;
+    border-radius: 50%; 
+}
+
 
 .email-card-subject-body {
     grid-column: span 2;
     display: flex;
     flex-direction: row;
     justify-content: start;
-    /* overflow: hidden;
-    text-overflow: ellipsis; */
-
 }
 
 .email-card-subject {
@@ -156,16 +183,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
     color: #5f6368;
-    /* overflow: hidden;
-    text-overflow: ellipsis; */
 }
 
 .email-card-sentAt {
     font-size: 12px;
     color: #5f6368;
     display: block;
-    /* display: inline; */
-
 }
 
 .email-actions {
@@ -180,6 +203,6 @@
     justify-content: center;
     text-align: right;
     justify-content: flex-end;
-
+    transform: translateY(-28%);
 
 }

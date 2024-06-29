@@ -3,7 +3,7 @@
  .emails-lst-container {
      display: grid;
      height: 100vh; 
-     width: calc(100vw - 3.472vw);
+     /* width: calc(100vw - 3.472vw); */
  }
 
  .email-card {
