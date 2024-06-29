@@ -27,3 +27,7 @@ nav a.active {
     font-weight: bold;
     text-decoration: overline;
 }
+
+.mail-header {
+    background-color: pink; /* Specify your desired background color */
+  }

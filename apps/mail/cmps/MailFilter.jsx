@@ -40,14 +40,14 @@ export function MailFilter({ filterBy, onChangeFilter }) {
 
   return (
     <div className='mail-filter'>
+      <span className='search-icon material-icons'>search</span>
       <input
         type='text'
         placeholder='Search...'
         value={filterBy.txt || ''}
         onChange={(e) => handleChange(FILTERS.TEXT, e.target.value)}
         className='search-input'
-        />
-        <span className='search-icon material-icons'>search</span>
+      />
       <label>
         <input
           type='checkbox'

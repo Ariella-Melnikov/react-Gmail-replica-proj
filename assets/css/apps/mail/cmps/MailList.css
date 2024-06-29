@@ -3,7 +3,6 @@
  .emails-lst-container {
      display: grid;
      height: 100vh; 
-     /* width: calc(100vw - 3.472vw); */
  }
 
  .email-card {
@@ -36,65 +35,3 @@
      font-size: 12px;
      color: #5f6368;
  }
-
-  /* .email-card {
-    display: contents;
-    padding: 10px;
-    transition: background-color 0.3s ease;
- } */
- /* .email-card:hover {
-    background-color: #f2f6fc;
- } */
-
- /* .email-card:hover {
-    background-color: #f2f6fc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  } */
- /* .email-actions {
-     display: flex;
-     gap: 8px;
- }
-
- .email-actions button {
-     background-color: #d93025;
-     color: white;
-     border: none;
-     border-radius: 4px;
-     padding: 8px 12px;
-     cursor: pointer;
-     transition: background-color 0.3s ease;
- }
-
- .email-actions button:hover {
-     background-color: #b71c1c;
- }
-
- .email-actions a {
-     color: white;
-     text-decoration: none;
- } */
-
- /* .email-actions {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 10px; 
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.3s ease; 
-     display: none;
-  }
-   */
-  /* .email-card:hover .email-actions {
-    display: block;
-  } */
-  
-  /* .email-actions button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-left: 5px;
-  }
-   */

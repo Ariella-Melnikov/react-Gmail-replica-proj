@@ -41,7 +41,9 @@ function query(filterBy = getDefaultFilter()) {
 
     if (filterBy.txt) {
       const regex = new RegExp(filterBy.txt, 'i')
-      emails = emails.filter((email) => regex.test(email.subject) || regex.test(email.body) || regex.test(email.from) || regex.test(email.to) )
+      emails = emails.filter(
+        (email) => regex.test(email.subject) || regex.test(email.body) || regex.test(email.from) || regex.test(email.to)
+      )
     }
 
     if (filterBy.isRead) {
@@ -49,18 +51,28 @@ function query(filterBy = getDefaultFilter()) {
     }
 
     if (filterBy.sent_at) {
-      let now = new Date();
+      let now = new Date()
       switch (filterBy.sent_at) {
         case TIME_RANGES.WEEK_AGO:
-          let sevenDaysAgo = new Date(now.setDate(now.getDate() - 7));
+          let sevenDaysAgo = new Date(now.setDate(now.getDate() - 7))
           emails = emails.filter((email) => email.sentAt && email.sentAt > sevenDaysAgo)
           break
+          case TIME_RANGES.MONTH_AGO:
+            let oneMonthAgo = new Date();
+            oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+            emails = emails.filter((email) => email.sentAt && new Date(email.sentAt) > oneMonthAgo);
+            break;
+            case TIME_RANGES.SIX_MONTHS_AGO:
+              let sixMonthsAgo = new Date();
+              sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+              emails = emails.filter((email) => email.sentAt && new Date(email.sentAt) > sixMonthsAgo);
+              break;
         case TIME_RANGES.YEAR_AGO:
-          let year_ago = new Date(now.setFullYear(now.getFullYear() - 1));
+          let year_ago = new Date(now.setFullYear(now.getFullYear() - 1))
           emails = emails.filter((email) => email.sentAt && email.sentAt > year_ago)
           break
         case TIME_RANGES.OVER_A_YEAR:
-          let over_1_year = new Date(now.setFullYear(now.getFullYear() - 1));
+          let over_1_year = new Date(now.setFullYear(now.getFullYear() - 1))
           emails = emails.filter((email) => email.sentAt && email.sentAt < over_1_year)
           break
         default:
@@ -104,7 +116,7 @@ function setFilterBy(filterBy = {}) {
 }
 
 function getDefaultFilter() {
-  return { status: 'all', txt: '', isRead: false,  sent_at: TIME_RANGES.ANY_TIME, lables: [] } // Example default filter values
+  return { status: 'all', txt: '', isRead: false, sent_at: TIME_RANGES.ANY_TIME, lables: [] } // Example default filter values
 }
 
 function toggleStar(emailId) {

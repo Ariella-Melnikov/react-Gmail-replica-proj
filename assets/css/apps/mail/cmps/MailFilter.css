@@ -1,27 +1,19 @@
 .mail-filter {
     display: flex;
     align-items: center;
-    gap: 15px; /* Space between filter elements */
+    gap: 15px; 
     padding: 10px 20px;
     border-bottom: 1px solid #ddd;
     background-color: #ffffff;
   }
   
-  /* .mail-filter input[type="text"] {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    width: 200px;
-    outline: none;
-    background-color: #ebf1fd;
-  } */
 
   .mail-filter input[type="text"] {
-    padding: 12px 16px; /* Increased padding for a bigger input box */
+    padding: 12px 16px; 
     border: 1px solid #ccc;
-    border-radius: 20px; /* Increased border-radius for rounder corners */
-    width: 300px; /* Increased width for a bigger input box */
-    font-size: 16px; /* Increased font size for better readability */
+    border-radius: 20px; 
+    width: 300px; 
+    font-size: 16px; 
     outline: none;
     background-color: #ebf1fd;
   }

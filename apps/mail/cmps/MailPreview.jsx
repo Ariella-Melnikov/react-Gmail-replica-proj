@@ -2,6 +2,9 @@ const { useState, useEffect } = React
 const { Link } = ReactRouterDOM
 
 import { emailService } from '../services/email.service.js'
+import { showSuccessMsg } from '../../../services/event-bus.service.js'
+import { showErrorMsg } from '../../../services/event-bus.service.js'
+
 export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
   const [isMarked, setIsMarked] = useState(email.isMarked)
 
@@ -51,6 +54,7 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
     emailService.toggleTrash(email.id).then(() => {
       email.isRemoved = true
       onChangeEmail(email)
+      showSuccessMsg('Conversation moved to Trash.')
     })
   }
 
@@ -62,20 +66,6 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
     return parts[0]
   }
 
-  // const renderActionButton = () => {
-  //   if (showRemoveButton) {
-  //     return (
-  //       <button className='material-symbols-outlined' onClick={() => onRemoveMail(email.id)}>
-  //         delete
-  //       </button>
-  //     );
-  //   } else {
-  //     return (
-
-  //     );
-  //   }
-  // };
-
   return (
     <article className={`email-card ${email.isRead && 'email-card-read'}`}>
       <div className={`email-card-select-email ${email.isRead && 'email-card-read'}`}>
@@ -83,19 +73,8 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
           <span className='material-symbols-outlined'>drag_indicator</span>
         </div>
         <div className='email-card-btn-from'>
-          {/* <div className='mark-as-read-btn'>
-            <button className='email-btn' onClick={handleMarkedToggle}>
-              <span>
-                {email.isMarked ? (
-                  <span className='material-icons'>check_box</span>
-                ) : (
-                  <span className='material-symbols-outlined'>check_box_outline_blank</span>
-                )}
-              </span>
-            </button>
-          </div> */}
           {/* {renderActionButton()} */}
-          <button className='starred-btn' title="Starred" onClick={handleStarToggle}>
+          <button className='starred-btn' title='Starred' onClick={handleStarToggle}>
             <span>
               {email.isStarred ? (
                 <span className='material-icons custom-icon'>star</span>
@@ -104,9 +83,9 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
               )}
             </span>
           </button>
-          <button className='email-btn' title="Detils">
-            <Link key={email.id} to={`/mail/${email.id}`} >
-              <span className="material-symbols-outlined">info</span>
+          <button className='email-btn' title='Detils'>
+            <Link key={email.id} to={`/mail/${email.id}`}>
+              <span className='material-symbols-outlined'>info</span>
             </Link>
           </button>
           <div className='email-card-from'>{extractName(email.from)}</div>
@@ -118,16 +97,20 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
         <div className='email-actions'>
           <div className='email-card-sentAt'> {formatDate(email.sentAt)} </div>
           <div className='delete-btn'>
-            <span className='material-symbols-outlined' title="Delete" onClick={handleRemoveMail}>
+            <span className='material-symbols-outlined' title='Delete' onClick={handleRemoveMail}>
               delete
             </span>
-            </div>
-            <div className='read-btn' onClick={handleReadToggle}>
+          </div>
+          <div className='read-btn' onClick={handleReadToggle}>
             <span>
               {email.isRead ? (
-                <span className='material-symbols-outlined' title="Mark as unread">mark_email_unread</span>
+                <span className='material-symbols-outlined' title='Mark as unread'>
+                  mark_email_unread
+                </span>
               ) : (
-                <span className='material-symbols-outlined' title="Mark as read">drafts</span>
+                <span className='material-symbols-outlined' title='Mark as read'>
+                  drafts
+                </span>
               )}
             </span>
           </div>

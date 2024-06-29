@@ -58,7 +58,6 @@ export function MailCompose({ onClose, onChangeEmail }) {
       <textarea onChange={handleChange} value={body} id='body' name='body' rows='10' />
 
       <button type='submit' className='send-btn' title="Send">Send</button>
-      {/* <button type='button' onClick={onCloseComponent} className='cancel-btn'>Cancel</button> */}
     </form>
   </section>
   )

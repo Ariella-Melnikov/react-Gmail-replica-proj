@@ -2,6 +2,7 @@ const { Link, NavLink } = ReactRouterDOM
 import logo from '../assets/img/LOGOS/GMAILNOTES.png'
 
 export function AppHeader() {
+    
 
     return <header className="app-header">
         <Link to="/">

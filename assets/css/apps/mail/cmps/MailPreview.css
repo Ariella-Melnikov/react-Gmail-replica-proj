@@ -38,27 +38,18 @@
 
 
     position: relative;
-
-    /* vertical-align: middle */
-    /* z-index: 1; */
-    /* top: 85px; */
 }
-
-
 
 .email-card-btn-from {
     grid-column: span 1;
     display: flex;
     align-items: center;
     margin-left: 30px;
-    /* justify-content: center; */
 }
 
 .email-card-from {
     font-weight: bold;
     margin-left: 10px;
-    /* margin-right: 100px; */
-
 }
 
 .email-btn {
@@ -66,9 +57,7 @@
     background-color: transparent;
     padding: 0;
     cursor: pointer;
-    /* margin-inline: start; */
     margin-right: 10px;
-
 }
 
 .starred-btn {
@@ -76,7 +65,7 @@
     background-color: transparent;
     padding: 0;
     cursor: pointer;
-    /* margin-inline: start; */
+
     margin-right: 10px;
     transition: background-color 0.3s ease, border 0.3s ease;
 
@@ -85,19 +74,19 @@
 .delete-btn {
     display: none;
     background-color: transparent;
-    padding: 4px; /* Set initial padding */
+    padding: 4px; 
     cursor: pointer;
-    border-radius: 50%; /* Ensure it has a consistent shape */
+    border-radius: 50%; 
     transition: background-color 0.3s ease, border 0.3s ease;
 }
 
 .read-btn {
     display: none;
     background-color: transparent;
-    padding: 4px; /* Set initial padding */
+    padding: 4px; 
     cursor: pointer;
-    border-radius: 50%; /* Ensure it has a consistent shape */
-    /* transition: background-color 0.3s ease, border 0.3s ease; */
+    border-radius: 50%; 
+
   }
 
 
@@ -174,8 +163,6 @@
 
 .email-card-subject {
     font-weight: bold;
-    overflow: hidden;
-    text-overflow: ellipsis;
     margin-right: 10px;
 }
 
