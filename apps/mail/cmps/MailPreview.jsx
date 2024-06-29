@@ -2,6 +2,8 @@ const { useState, useEffect } = React
 
 import { emailService } from '../services/email.service.js'
 export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
+  const [isMarked, setIsMarked] = useState(email.isMarked);
+
   useEffect(() => {
     console.log('I enter the useEffect on preview mail')
   }, [])
@@ -26,14 +28,22 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
     }
   }
 
+
   const handleStarToggle = () => {
     emailService.toggleStar(email.id)
     email.isStarred = !email.isStarred
     onChangeEmail(email)
   }
 
+  const handleMarkedToggle = () => {
+    emailService.toggleMarked(email.id)
+    email.isMarked = !email.isMarked
+    onChangeEmail(email)
+  }
+
   const handleRemoveMail = () => {
     emailService.toggleTrash(email.id).then(() => {
+      email.isRemoved = true
       onChangeEmail(email)
     })
   }
@@ -59,6 +69,17 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
           <span className='material-symbols-outlined'>drag_indicator</span>
         </div>
         <div className='email-card-btn-from'>
+        <div className='mark-as-read-btn'>
+        <button className='email-btn' onClick={handleMarkedToggle}>
+              <span>
+              {email.isMarked ? (
+                <span className='material-icons custom-icon'>check_box</span>
+              ) : (
+                <span className='material-symbols-outlined'>check_box_outline_blank</span>
+              )}
+            </span>
+            </button>
+          </div>
           {/* {renderActionButton()} */}
           <button className='email-btn' onClick={handleStarToggle}>
             <span>
