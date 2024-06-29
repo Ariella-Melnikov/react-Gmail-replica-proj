@@ -1,39 +1,45 @@
-// note service
-
-import { storageService } from '../../../services/storage.service.js'
 import { asyncStorageService } from '../../../services/async-storage.service.js'
 import { utilService } from '../../../services/util.service.js'
+import { storageService } from '../../../services/storage.service.js'
 
-
-let gHardCodedNotes
+let gHardCoded
 const NOTES_KEY = 'noteDB'
-const NEW_NOTES_KEY = 'newnoteDB'
-createNotes()
+
+// Initialize notes if not already in localStorage
+_createNotes()
 
 export const noteService = {
     query,
-    queryNewNote,
     get,
     remove,
-    createTxtNote,
+    getDefaultFilter,
+    save,
+    getEmptyNote,
 }
 
-
-
- 
-
-function query() {
+function query(filterBy = {}) {
     return asyncStorageService.query(NOTES_KEY)
-    .then(notes => {
-
-        return notes
-    })
+        .then(notes => {
+            if (!notes || !notes.length) {
+                notes = gHardCoded
+                _saveNotesToStorage()
+            }
+            
+            // Filter by type
+            if (filterBy.type) {
+                const regExp = new RegExp(filterBy.type, "i")
+                notes = notes.filter((note) => regExp.test(note.type))
+            }
+            
+            // Filter by text
+            if (filterBy.text) {
+                const regExp = new RegExp(filterBy.text, "i")
+                notes = notes.filter((note) => regExp.test(note.info.txt))
+            }
+            
+            return notes
+        })
 }
-
-function queryNewNote(){
-
-}
-
 
 function get(noteId) {
     return asyncStorageService.get(NOTES_KEY, noteId)
@@ -43,279 +49,170 @@ function remove(noteId) {
     return asyncStorageService.remove(NOTES_KEY, noteId)
 }
 
+function getDefaultFilter() {
+    return { text: '', type: '' }
+}
 
-async function createTxtNote(subject, content) {
-    let notes = await asyncStorageService.query(NOTES_KEY)
-    let note = {
-        id: utilService.makeId(),
+function save(note) {
+    if (note.id) {
+        return asyncStorageService.put(NOTES_KEY, note)
+    } else {
+        const newNote = _createNote(note.title)
+        return asyncStorageService.post(NOTES_KEY, newNote)
+    }
+}
+
+
+function _saveNotesToStorage() {
+    asyncStorageService.save(NOTES_KEY, gHardCoded)
+}
+
+
+function getEmptyNote(type, title = '') {
+    return { title, type }
+
+}
+
+function _createNote(title) {
+    return {
+        id: utilService.makeId(5),
         createdAt: Date.now(),
         type: 'NoteTxt',
         isPinned: false,
         style: {
-            backgroundColor: utilService.getRandomColor()
+            backgroundColor: '#f6e2dd'
         },
         info: {
-            txt: content,
-            subject: subject,
+            txt: title
         }
     }
+  }
 
-    console.log(note)
-    notes.push(note)
-    await asyncStorageService.post(NOTES_KEY, note)
-}
-
-
-function createNotes() {
-    gHardCodedNotes = storageService.loadFromStorage(NOTES_KEY);
-    if (!gHardCodedNotes || !gHardCodedNotes.length) {
-        const gHardCodedNotes = [
+function _createNotes() {
+    gHardCoded = storageService.loadFromStorage(NOTES_KEY)
+    if (!gHardCoded || !gHardCoded.length) {
+        gHardCoded = [
             {
-              id: 'n101',
-              createdAt: 1112233,
-              type: 'NoteImg',
-              isPinned: false,
-              style: {
-                backgroundColor: '#0d0'
-              },
-              info: {
-                url: 'http://some-img/me1',
-                title: 'Morning View'
-              }
+                id: 'n101',
+                createdAt: Date.now(),
+                type: 'NoteTxt',
+                isPinned: true,
+                style: {
+                    backgroundColor: '#f6e2dd'
+                },
+                info: {
+                    txt: 'There are 10 types of people in this world, those who no binary and those who dont!'
+                }
             },
             {
-              id: 'n102',
-              createdAt: 1112244,
-              type: 'NoteTodo',
-              isPinned: true,
-              style: {
-                backgroundColor: '#d00'
-              },
-              info: {
-                todos: [
-                  { id: 't1', txt: 'Buy milk', isDone: false },
-                  { id: 't2', txt: 'Call John', isDone: true }
-                ],
-                subject: 'Daily Tasks',
-                subjectValue: 'Personal'
-              }
+                id: 'n102',
+                createdAt: Date.now(),
+                type: 'NoteTxt',
+                isPinned: false,
+                style: {
+                    backgroundColor: '#d1f7c4'
+                },
+                info: {
+                    txt: 'Why do programmers prefer dark mode? Because light attracts bugs!'
+                }
             },
             {
-              id: 'n103',
-              createdAt: 1112255,
-              type: 'NoteTxt',
-              isPinned: false,
-              style: {
-                backgroundColor: '#00d'
-              },
-              info: {
-                txt: 'Meeting at 3 PM',
-                subject: 'Meeting',
-                subjectValue: '3 PM'
-              }
+                id: 'n103',
+                createdAt: Date.now(),
+                type: 'NoteTxt',
+                isPinned: true,
+                style: {
+                    backgroundColor: '#c9e8f6'
+                },
+                info: {
+                    txt: 'A SQL query walks into a bar, walks up to two tables and asks, "Can I join you?"'
+                }
             },
             {
-              id: 'n104',
-              createdAt: 1112266,
-              type: 'NoteVideo',
-              isPinned: true,
-              style: {
-                backgroundColor: '#ddd'
-              },
-              info: {
-                videoUrl: 'http://some-video/v1',
-                title: 'How to make pasta'
-              }
+                id: 'n104',
+                createdAt: Date.now(),
+                type: 'NoteTxt',
+                isPinned: false,
+                style: {
+                    backgroundColor: '#f4f0c4'
+                },
+                info: {
+                    txt: 'Why do Java developers wear glasses? Because they don’t C#.'
+                }
             },
             {
-              id: 'n105',
-              createdAt: 1112277,
-              type: 'NoteImg',
-              isPinned: false,
-              style: {
-                backgroundColor: '#ff0'
-              },
-              info: {
-                url: 'http://some-img/me2',
-                title: 'Evening Relaxation'
-              }
+                id: 'n105',
+                createdAt: Date.now(),
+                type: 'NoteTxt',
+                isPinned: true,
+                style: {
+                    backgroundColor: '#e1d4f6'
+                },
+                info: {
+                    txt: 'There are 10 types of people in the world: those who understand binary and those who don’t.'
+                }
             },
             {
-              id: 'n106',
-              createdAt: 1112288,
-              type: 'NoteTodo',
-              isPinned: true,
-              style: {
-                backgroundColor: '#0ff'
-              },
-              info: {
-                todos: [
-                  { id: 't3', txt: 'Schedule car service', isDone: false },
-                  { id: 't4', txt: 'Finish project report', isDone: true }
-                ],
-                subject: 'Work Tasks',
-                subjectValue: 'Urgent'
-              }
+                id: 'n106',
+                createdAt: Date.now(),
+                type: 'NoteTxt',
+                isPinned: false,
+                style: {
+                    backgroundColor: '#f6dfd9'
+                },
+                info: {
+                    txt: 'How many programmers does it take to change a light bulb? None, that’s a hardware problem.'
+                }
             },
             {
-              id: 'n107',
-              createdAt: 1112299,
-              type: 'NoteTxt',
-              isPinned: false,
-              style: {
-                backgroundColor: '#f0f'
-              },
-              info: {
-                txt: 'Grocery shopping list: Eggs, Bread, Apples',
-                subject: 'Grocery List',
-                subjectValue: 'Shopping'
-              }
+                id: 'n107',
+                createdAt: Date.now(),
+                type: 'NoteTxt',
+                isPinned: true,
+                style: {
+                    backgroundColor: '#c4f6d3'
+                },
+                info: {
+                    txt: 'I would tell you a UDP joke, but you might not get it.'
+                }
             },
             {
-              id: 'n108',
-              createdAt: 1112300,
-              type: 'NoteVideo',
-              isPinned: true,
-              style: {
-                backgroundColor: '#0df'
-              },
-              info: {
-                videoUrl: 'http://some-video/v2',
-                title: 'Yoga for beginners'
-              }
+                id: 'n108',
+                createdAt: Date.now(),
+                type: 'NoteTxt',
+                isPinned: false,
+                style: {
+                    backgroundColor: '#f6e5c4'
+                },
+                info: {
+                    txt: 'Why do programmers hate nature? It has too many bugs.'
+                }
             },
             {
-              id: 'n109',
-              createdAt: 1112311,
-              type: 'NoteImg',
-              isPinned: false,
-              style: {
-                backgroundColor: '#ddd'
-              },
-              info: {
-                url: 'http://some-img/me3',
-                title: 'Holiday Memories'
-              }
+                id: 'n109',
+                createdAt: Date.now(),
+                type: 'NoteTxt',
+                isPinned: true,
+                style: {
+                    backgroundColor: '#c4daf6'
+                },
+                info: {
+                    txt: 'A programmer’s wife tells him: "Run to the store and get a loaf of bread. If they have eggs, get a dozen." The programmer comes home with 12 loaves of bread.'
+                }
             },
             {
-              id: 'n110',
-              createdAt: 1112322,
-              type: 'NoteTodo',
-              isPinned: true,
-              style: {
-                backgroundColor: '#a00'
-              },
-              info: {
-                todos: [
-                  { id: 't5', txt: 'Renew gym membership', isDone: false },
-                  { id: 't6', txt: 'Order new books online', isDone: false }
-                ],
-                subject: 'Renewals',
-                subjectValue: 'Monthly'
-              }
-            },
-            {
-              id: 'n111',
-              createdAt: 1112333,
-              type: 'NoteTxt',
-              isPinned: false,
-              style: {
-                backgroundColor: '#0a0'
-              },
-              info: {
-                txt: 'Update resume for job application',
-                subject: 'Job Application',
-                subjectValue: 'Resume Update'
-              }
-            },
-            {
-              id: 'n112',
-              createdAt: 1112344,
-              type: 'NoteVideo',
-              isPinned: true,
-              style: {
-                backgroundColor: '#00a'
-              },
-              info: {
-                videoUrl: 'http://some-video/v3',
-                title: 'Best DIY Projects'
-              }
-            },
-            {
-              id: 'n113',
-              createdAt: 1112355,
-              type: 'NoteImg',
-              isPinned: false,
-              style: {
-                backgroundColor: '#b0b'
-              },
-              info: {
-                url: 'http://some-img/me4',
-                title: 'Pet Adventures'
-              }
-            },
-            {
-              id: 'n114',
-              createdAt: 1112366,
-              type: 'NoteTodo',
-              isPinned: true,
-              style: {
-                backgroundColor: '#bba'
-              },
-              info: {
-                todos: [
-                  { id: 't7', txt: 'Prepare for Monday presentation', isDone: true },
-                  { id: 't8', txt: 'Check emails', isDone: false }
-                ],
-                subject: 'Work Tasks',
-                subjectValue: 'Monday'
-              }
-            },
-            {
-              id: 'n115',
-              createdAt: 1112377,
-              type: 'NoteTxt',
-              isPinned: false,
-              style: {
-                backgroundColor: '#abc'
-              },
-              info: {
-                txt: 'Call plumber to fix kitchen sink',
-                subject: 'Home Maintenance',
-                subjectValue: 'Plumbing'
-              }
-            },
-            {
-              id: 'n116',
-              createdAt: 1112388,
-              type: 'NoteVideo',
-              isPinned: true,
-              style: {
-                backgroundColor: '#cba'
-              },
-              info: {
-                videoUrl: 'http://some-video/v4',
-                title: 'Cooking Basics: The Easy Way'
-              }
-            },
-            {
-              id: 'n117',
-              createdAt: 1112399,
-              type: 'NoteImg',
-              isPinned: false,
-              style: {
-                backgroundColor: '#ccd'
-              },
-              info: {
-                url: 'http://some-img/me5',
-                title: 'Scenic Routes for Cycling'
-              }
-            },
-          ];
-          
-        storageService.saveToStorage(NOTES_KEY, gHardCodedNotes);
+                id: 'n110',
+                createdAt: Date.now(),
+                type: 'NoteTxt',
+                isPinned: false,
+                style: {
+                    backgroundColor: '#f6c4d9'
+                },
+                info: {
+                    txt: 'In order to understand recursion, you must first understand recursion.'
+                }
+            }
+        ]
+        storageService.saveToStorage(NOTES_KEY, gHardCoded)
     }
-
 }
-
-

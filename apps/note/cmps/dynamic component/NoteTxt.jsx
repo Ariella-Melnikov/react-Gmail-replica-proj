@@ -1,12 +1,6 @@
 
 
 
-const NoteTxt = ({ note }) => {
-    return (
-        <div style={{ backgroundColor: note.style.backgroundColor }}>
-            <p>{note.info.txt}</p>
-        </div>
-    )
+export function NoteTxt() {
+    return <div>NoteTxt</div>
 }
-
-export default NoteTxt
