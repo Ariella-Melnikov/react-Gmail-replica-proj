@@ -31,6 +31,25 @@
    z-index: 1;
  }
 
+ .sidebar-btn.active {
+  background-color: #d5e3ff;
+  border: 2px; 
+  border-left: 4px ;
+  border-radius: 40px;
+}
+
+.compose-btn{
+  background-color: #c7e7ff;
+  border: 2px solid #c7e7ff; /* Border color */
+  border-radius: 40px; /* Circular border */
+  transition: border 0.3s ease, padding 0.3s ease; 
+}
+
+.sidebar-btn.active:hover {
+  background-color: #d5e3ff; 
+  border-radius: 0;
+}
+
  .sidebar:hover {
    width: 150px;
  }
@@ -56,10 +75,15 @@
    overflow: hidden;
  }
 
+ .sidebar button:hover .compose-btn{
+  background-color: #c7e7ff;
+}
+
+
  .sidebar button:hover {
    background-color: #eaebf0;
  }
- 
+
 
  .button-text {
   opacity: 0; 
