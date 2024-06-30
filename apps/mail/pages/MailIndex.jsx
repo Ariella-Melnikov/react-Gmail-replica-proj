@@ -186,9 +186,11 @@ export function MailIndex() {
     setIsComposeOpen(!isComposeOpen)
   }
 
-  function handleButtonClick(navigationLink) {
+  function handleButtonClick(navigationLink, viewname) {
     navigate(navigationLink)
     setCurrentView(navigationLink)
+    // setCurrentView(viewname)
+
   }
 
   return (
@@ -197,39 +199,41 @@ export function MailIndex() {
         <aside className='sidebar'>
           <ul>
             <li>
+              <div className="compose-btn">
               <button onClick={toggleCompose}>
                 <span className='material-symbols-outlined'>edit</span>
                 <span className='button-text'>Compose</span>
               </button>
+              </div>
             </li>
             <li>
-              <button onClick={() => handleButtonClick('inbox')}>
+              <button className={`sidebar-btn ${currentView === 'inbox' ? 'active' : ''}`} onClick={() => handleButtonClick('inbox')}>
                 <span className='material-symbols-outlined'>inbox</span>
                 <span className='button-text'>Inbox</span>
               </button>
             </li>
             <li>
-              <button onClick={() => handleButtonClick('starred')}>
+              <button className={`sidebar-btn ${currentView === 'starred' ? 'active' : ''}`} onClick={() => handleButtonClick('starred')}>
                 <span className='material-symbols-outlined'>star</span>
                 <span className='button-text'>Starred</span>
               </button>
             </li>
             <li>
-              <button onClick={() => handleButtonClick('sent')}>
+              <button className={`sidebar-btn ${currentView === 'sent' ? 'active' : ''}`} onClick={() => handleButtonClick('sent')}>
                 <span className='material-symbols-outlined'>send</span>
                 <span className='button-text'>Send</span>
               </button>
             </li>
             <li>
-              <button onClick={() => handleButtonClick('trash')}>
-                <span className='material-symbols-outlined'>delete</span>
-                <span className='button-text'>Trash</span>
+              <button className={`sidebar-btn ${currentView === 'draft' ? 'active' : ''}`}  onClick={() => handleButtonClick('draft')}>
+                <span className='material-symbols-outlined'>draft</span>
+                <span className='button-text'>Draft</span>
               </button>
             </li>
             <li>
-              <button onClick={() => handleButtonClick('draft')}>
-                <span className='material-symbols-outlined'>draft</span>
-                <span className='button-text'>Draft</span>
+              <button  className={`sidebar-btn ${currentView === 'trash' ? 'active' : ''}`} onClick={() => handleButtonClick('trash')}>
+                <span className='material-symbols-outlined'>delete</span>
+                <span className='button-text'>Trash</span>
               </button>
             </li>
           </ul>
