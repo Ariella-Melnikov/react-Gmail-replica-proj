@@ -1,6 +1,5 @@
 header {
-    background: lightcyan;
-    /* border-bottom: 2px solid white; */
+    background-color: #f6f8fd;
 }
 
 .app-header {
@@ -29,5 +28,11 @@ nav a.active {
 }
 
 .mail-header {
-    background-color: pink; /* Specify your desired background color */
+    background-color: pink; 
+  }
+
+  .logo {
+    height: 40px;
+    width: 109px;
+    margin-left: 15px;
   }

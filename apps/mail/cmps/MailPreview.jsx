@@ -60,9 +60,7 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
 
   function extractName(email) {
     if (!email) return
-    // Split the email address by '@'
     const parts = email.split('@')
-    // Return the part before '@' as sender's name
     return parts[0]
   }
 
@@ -83,17 +81,16 @@ export function MailPreview({ email, onChangeEmail, showRemoveButton }) {
               )}
             </span>
           </button>
-          <button className='email-btn' title='Detils'>
-            <Link key={email.id} to={`/mail/${email.id}`}>
-              <span className='material-symbols-outlined'>info</span>
-            </Link>
-          </button>
+          <Link key={email.id} to={`/mail/${email.id}`} className="email-card-link">
           <div className='email-card-from'>{extractName(email.from)}</div>
+          </Link>
         </div>
-        <div className='email-card-subject-body'>
-          <div className='email-card-subject'>{email.subject} - </div>
-          <div className='email-card-body'> {email.body} </div>
-        </div>
+        <Link key={email.id} to={`/mail/${email.id}`} className="email-card-link">
+          <div className="email-card-subject-body">
+            <div className="email-card-subject">{email.subject} - </div>
+            <div className="email-card-body">{email.body}</div>
+          </div>
+        </Link>
         <div className='email-actions'>
           <div className='email-card-sentAt'> {formatDate(email.sentAt)} </div>
           <div className='delete-btn'>

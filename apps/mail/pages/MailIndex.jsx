@@ -34,18 +34,6 @@ export function MailIndex() {
     console.log('emails', emails)
   }, [emails])
 
-  // useEffect(() => {
-  //   console.log('filterBy', filterBy)
-  // }, [filterBy])
-
-  // function handleExitUserMessage(msg) {
-  //   showErrorMsgMail( msg, true);
-  // }
-
-  // function handleUndoMessage(msg) {
-  //   showSuccessMsg(msg, true);
-  // }
-
   function onChangeEmail(email ={}) {
     let emailsNextState = emails.map((e) => (e.id == email.id ? email : e))
     console.log(emailsNextState)
@@ -105,8 +93,6 @@ export function MailIndex() {
       default:
         break
     }
-
-    // TODO: check load from moke
   }
 
   function renderCurrentView() {
@@ -174,13 +160,6 @@ export function MailIndex() {
         )
     }
   }
-  // function handleToggleStar(emailId) {
-  //   emailService.toggleStar(emailId).then(() => {
-  //     setEmails((prevEmails) =>
-  //       prevEmails.map((email) => (email.id === emailId ? { ...email, isStarred: !email.isStarred } : email))
-  //     )
-  //   })
-  // }
 
   function toggleCompose() {
     setIsComposeOpen(!isComposeOpen)
@@ -189,8 +168,6 @@ export function MailIndex() {
   function handleButtonClick(navigationLink, viewname) {
     navigate(navigationLink)
     setCurrentView(navigationLink)
-    // setCurrentView(viewname)
-
   }
 
   return (
